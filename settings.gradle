@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Eliq Weather"
 include ':app'
+include ':data'
+include ':domain'
