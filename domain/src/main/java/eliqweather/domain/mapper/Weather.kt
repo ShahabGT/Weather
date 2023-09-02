@@ -1,12 +1,12 @@
-package eliqweather.data.mapper
+package eliqweather.domain.mapper
 
-import eliqweather.data.models.Daily
-import eliqweather.data.models.DailyWeatherModel
-import eliqweather.data.models.Hourly
-import eliqweather.data.models.HourlyWearherModel
-import eliqweather.data.models.WeatherModel
-import eliqweather.data.models.WeatherResponse
-import eliqweather.data.utils.orZero
+import eliqweather.domain.models.Daily
+import eliqweather.domain.models.DailyWeatherModel
+import eliqweather.domain.models.Hourly
+import eliqweather.domain.models.HourlyWearherModel
+import eliqweather.domain.models.WeatherModel
+import eliqweather.domain.models.WeatherResponse
+import eliqweather.domain.utils.orZero
 
 /**
  * @Author: Shahab Azimi
