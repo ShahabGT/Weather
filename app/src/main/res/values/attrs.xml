@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Primary-->
+    <attr name="Primary_Main" format="color" />
+    <attr name="Primary_Light" format="color" />
+    <attr name="On_Primary_High_Emphasis" format="color" />
+    <attr name="On_Primary_Medium_Emphasis" format="color" />
+    <!--Background Main-->
+    <attr name="Background_Main" format="color" />
+</resources>
