@@ -1,0 +1,39 @@
+ext.flavorConfig = {
+
+    flavorDimensions "default"
+    productFlavors {
+
+        develop {
+            ext.myApplicationIdSuffix = '.dev'
+            dimension "default"
+
+            buildConfigField "int", "VERSION_MAJOR", "$rootProject.VERSION_MAJOR"
+            buildConfigField "int", "VERSION_MINOR", "$rootProject.VERSION_MINOR"
+            buildConfigField "int", "VERSION_PATCH", "$rootProject.VERSION_PATCH"
+            buildConfigField "int", "VERSION_BUILD", "$rootProject.VERSION_BUILD"
+            buildConfigField("int", "TIME_OUT", "90")
+
+        }
+
+        production {
+            dimension "default"
+
+            buildConfigField "int", "VERSION_MAJOR", "$rootProject.VERSION_MAJOR"
+            buildConfigField "int", "VERSION_MINOR", "$rootProject.VERSION_MINOR"
+            buildConfigField "int", "VERSION_PATCH", "$rootProject.VERSION_PATCH"
+            buildConfigField "int", "VERSION_BUILD", "$rootProject.VERSION_BUILD"
+            buildConfigField("int", "TIME_OUT", "30")
+        }
+    }
+
+
+    productFlavors.all { flavor ->
+        if (flavor.hasProperty('myApplicationIdSuffix') && isApplicationProject()) {
+            flavor.applicationIdSuffix = flavor.myApplicationIdSuffix
+        }
+    }
+}
+
+def isApplicationProject() {
+    return project.android.class.simpleName.startsWith('BaseAppModuleExtension')
+}

@@ -13,7 +13,7 @@ ext {
 
     //----- Android libraries
     appCompatVersion = '1.5.1'
-    anotationVersion = '1.5.0'
+    andoridXAnnotationVersion = '1.5.0'
     annotationVersion = '1.3.2'
     androidxCore = '1.9.0'
     fragmentVersion = '1.5.5'
@@ -27,6 +27,10 @@ ext {
     locationServiceVersion = '21.0.1'
     googleGsonVersion = '2.10.1'
 
+    //----- Third party Libraries
+    retrofitVersion = '2.9.0'
+    okhttpVersion = '4.10.0'
+
 
     kotlin = [
             main            : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -36,7 +40,7 @@ ext {
 
     androidx = [
             activity          : "androidx.activity:activity:$rootProject.activityVersion",
-            annotation        : "androidx.annotation:annotation:$rootProject.anotationVersion",
+            annotation        : "androidx.annotation:annotation:$rootProject.andoridXAnnotationVersion",
             appcompat         : "androidx.appcompat:appcompat:$rootProject.appCompatVersion",
             core              : "androidx.core:core-ktx:$rootProject.androidxCore",
             fragment          : "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion",
@@ -60,6 +64,17 @@ ext {
             material              : "com.google.android.material:material:$rootProject.materialVersion",
             locationServices      : "com.google.android.gms:play-services-location:$rootProject.locationServiceVersion",
             gson                  : "com.google.code.gson:gson:$rootProject.googleGsonVersion",
+    ]
+
+    retrofit = [
+            main     : "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion",
+            converter: "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion",
+    ]
+
+    okhttp = [
+            main   : "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion",
+            logging: "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion",
+            cookie: "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion",
     ]
 
 }
