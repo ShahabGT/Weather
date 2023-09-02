@@ -2,10 +2,10 @@ package eliqweather.domain.mapper
 
 import eliqweather.domain.models.Daily
 import eliqweather.domain.models.DailyWeatherModel
+import eliqweather.domain.models.WeatherInfoModel
 import eliqweather.domain.models.Hourly
 import eliqweather.domain.models.HourlyWearherModel
 import eliqweather.domain.models.WeatherModel
-import eliqweather.domain.models.WeatherResponse
 import eliqweather.domain.utils.orZero
 
 /**
@@ -13,7 +13,7 @@ import eliqweather.domain.utils.orZero
  * @Date: 2023 - 09 - 02
  **/
 
-fun WeatherResponse.toDomain() = WeatherModel(
+fun WeatherInfoModel.response.toDomain() = WeatherModel(
     latitude = latitude,
     longitude = longitude,
     timezone = timezone,
