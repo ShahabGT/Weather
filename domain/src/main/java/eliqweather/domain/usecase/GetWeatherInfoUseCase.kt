@@ -13,11 +13,11 @@ import kotlinx.coroutines.CoroutineDispatcher
 class GetWeatherInfoUseCase constructor(
     private val repository: WeatherRepository,
     defaultDispatcher: CoroutineDispatcher
-) : SuspendUseCase<WeatherInfoModel.request, ResultEntity<WeatherInfoModel.response>>(
+) : SuspendUseCase<WeatherInfoModel.Request, ResultEntity<WeatherInfoModel.Response>>(
     defaultDispatcher
 ) {
 
-    override suspend fun execute(parameters: WeatherInfoModel.request) =
+    override suspend fun execute(parameters: WeatherInfoModel.Request) =
         repository.getWeatherInfo(parameters)
 
 }

@@ -1,14 +1,12 @@
 package eliqweather.domain.models
 
-import com.google.gson.annotations.SerializedName
-
 /**
  * @Author: Shahab Azimi
  * @Date: 2023 - 09 - 02
  **/
 sealed class WeatherInfoModel {
 
-    data class request(
+    data class Request(
         val isOnline: Boolean = false,
         val latitude: Double = DEFAULT_LATITUDE,
         val longitude: Double = DEFAULT_LONGITUDE,
@@ -17,23 +15,13 @@ sealed class WeatherInfoModel {
         val timezone: String = DEFAULT_TIMEZONE
     ) : WeatherInfoModel()
 
-    data class response(
-        val daily: Daily,
-        @SerializedName("daily_units")
-        val dailyUnits: DailyUnits,
-        val elevation: Double,
-        @SerializedName("generationtime_ms")
-        val generationTime: Double,
-        val hourly: Hourly,
-        @SerializedName("hourly_units")
-        val hourlyUnits: HourlyUnits,
-        val latitude: Double,
-        val longitude: Double,
-        val timezone: String,
-        @SerializedName("timezoneAbbreviation")
-        val timezone_abbreviation: String,
-        @SerializedName("utc_offset_seconds")
-        val utcOffsetInSeconds: Int
+    data class Response(
+        val latitude: Double = 0.0,
+        val longitude: Double = 0.0,
+        val timezone: String? = null,
+        val elevation: Double = 0.0,
+        val hourlyWeather: List<HourlyWearherModel> = listOf(),
+        val dailyWeather: List<DailyWeatherModel> = listOf()
     ) : WeatherInfoModel()
 
     companion object {
