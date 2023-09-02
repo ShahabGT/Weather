@@ -1,7 +1,7 @@
 package eliqweather.data.config
 
 import androidx.annotation.WorkerThread
-import eliqweather.domain.models.WeatherInfoModel
+import eliqweather.domain.models.WeatherResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -19,6 +19,6 @@ interface ServerService {
         @Query("hourly") hourly: String,
         @Query("daily") daily: String,
         @Query("timezone") timezone: String
-    ): WeatherInfoModel.response
+    ): WeatherResponse
 
 }

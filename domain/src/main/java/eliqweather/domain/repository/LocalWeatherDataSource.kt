@@ -8,6 +8,6 @@ import eliqweather.domain.utils.ResultEntity
  * @Date: 2023 - 09 - 02
  **/
 interface LocalWeatherDataSource {
-    suspend fun getWeatherLocation(request: WeatherInfoModel.request): ResultEntity<WeatherInfoModel.response>
+    suspend fun getWeatherLocation(): ResultEntity<WeatherInfoModel.Response>
 
 }

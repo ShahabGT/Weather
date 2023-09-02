@@ -11,11 +11,11 @@ class WeatherRepository(
     private val localDataSource: LocalWeatherDataSource
 ) {
 
-    suspend fun getWeatherInfo(request: WeatherInfoModel.request) =
+    suspend fun getWeatherInfo(request: WeatherInfoModel.Request) =
         if (request.isOnline)
             dataSource.getWeatherLocation(request)
         else
-            localDataSource.getWeatherLocation(request)
+            localDataSource.getWeatherLocation()
 
 
 }

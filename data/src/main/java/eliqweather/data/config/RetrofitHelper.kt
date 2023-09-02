@@ -17,7 +17,7 @@ class RetrofitHelper() {
 
     private lateinit var bankRetrofit: Retrofit
 
-    private lateinit var serverService: ServerService
+    lateinit var serverService: ServerService
 
     init {
         configRetrofit()
