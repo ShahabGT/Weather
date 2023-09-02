@@ -1,0 +1,65 @@
+ext {
+
+    VERSION_MAJOR = 1 //max two digits
+    VERSION_MINOR = 0 //max two digits
+    VERSION_PATCH = 0 //max two digits
+    VERSION_BUILD = 0 //max three digits
+
+    //----- Android config
+    androidBuildToolsVersion = '33.0.2'
+    androidMinSdkVersion = 24
+    androidTargetSdkVersion = 33
+    androidCompileSdkVersion = 33
+
+    //----- Android libraries
+    appCompatVersion = '1.5.1'
+    anotationVersion = '1.5.0'
+    annotationVersion = '1.3.2'
+    androidxCore = '1.9.0'
+    fragmentVersion = '1.5.5'
+    activityVersion ='1.6.1'
+    kotlinCoroutinesVersion = '1.6.4'
+    coroutinePermissionVersion = '2.0.3'
+    androidxConstraintlayoutVersion = '2.1.4'
+    androidxLifecycleExtensionsVersion = '2.2.0'
+    androidxLifecycleVersion = '2.5.1'
+    materialVersion = '1.9.0'
+    locationServiceVersion = '21.0.1'
+    googleGsonVersion = '2.10.1'
+
+
+    kotlin = [
+            main            : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            coroutineCore   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.kotlinCoroutinesVersion",
+            coroutineAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.kotlinCoroutinesVersion",
+    ]
+
+    androidx = [
+            activity          : "androidx.activity:activity:$rootProject.activityVersion",
+            annotation        : "androidx.annotation:annotation:$rootProject.anotationVersion",
+            appcompat         : "androidx.appcompat:appcompat:$rootProject.appCompatVersion",
+            core              : "androidx.core:core-ktx:$rootProject.androidxCore",
+            fragment          : "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion",
+            constraintlayout  : "androidx.constraintlayout:constraintlayout:$rootProject.androidxConstraintlayoutVersion",
+            livedataKtx       : "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.androidxLifecycleVersion",
+            lifecycle         : "androidx.lifecycle:lifecycle-extensions:$rootProject.androidxLifecycleExtensionsVersion",
+            viewmodelKtx      : "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.androidxLifecycleVersion",
+            lifecycleRuntime  : "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.androidxLifecycleVersion",
+            lifecycleCommon   : "androidx.lifecycle:lifecycle-common-java8:$rootProject.androidxLifecycleVersion",
+            navFrag           : "androidx.navigation:navigation-fragment-ktx:$nav_version",
+            navUi             : "androidx.navigation:navigation-ui-ktx:$nav_version",
+            navFeature        : "androidx.navigation:navigation-dynamic-features-fragment:$nav_version",
+    ]
+
+    tool = [
+            annotation           : "javax.annotation:javax.annotation-api:$rootProject.annotationVersion",
+            coroutinePermission  : "com.sagar:coroutinespermission:$rootProject.coroutinePermissionVersion",
+    ]
+
+    google = [
+            material              : "com.google.android.material:material:$rootProject.materialVersion",
+            locationServices      : "com.google.android.gms:play-services-location:$rootProject.locationServiceVersion",
+            gson                  : "com.google.code.gson:gson:$rootProject.googleGsonVersion",
+    ]
+
+}

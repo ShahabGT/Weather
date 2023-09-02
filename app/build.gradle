@@ -3,16 +3,18 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply from: "${rootProject.projectDir}/dependencies.gradle"
+
 android {
     namespace 'ir.shahabazimi.eliqweather'
-    compileSdk 33
+    compileSdk rootProject.androidCompileSdkVersion
 
     defaultConfig {
         applicationId "ir.shahabazimi.eliqweather"
-        minSdk 24
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        minSdk rootProject.androidMinSdkVersion
+        targetSdk rootProject.androidTargetSdkVersion
+        versionCode rootProject.VERSION_MAJOR * 10000000 + rootProject.VERSION_MINOR * 100000 + rootProject.VERSION_PATCH * 1000 + rootProject.VERSION_BUILD
+        versionName "${rootProject.VERSION_MAJOR}.${rootProject.VERSION_MINOR}.${rootProject.VERSION_PATCH}.${rootProject.VERSION_BUILD}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,11 +26,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 }
 
