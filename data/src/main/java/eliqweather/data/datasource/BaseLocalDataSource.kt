@@ -1,7 +1,7 @@
 package eliqweather.data.datasource
 
-import eliqweather.domain.utils.ErrorEntity
-import eliqweather.domain.utils.ResultEntity
+import eliqweather.domain.models.ErrorEntity
+import eliqweather.domain.models.ResultEntity
 import java.io.IOException
 
 /**

@@ -1,4 +1,4 @@
-package eliqweather.domain.utils
+package eliqweather.domain.models
 
 /**
  * @Author: Shahab Azimi

@@ -1,9 +1,11 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 apply from: "${rootProject.projectDir}/dependencies.gradle"
+apply from: "${rootProject.projectDir}/flavors.gradle"
 
 android {
     namespace 'ir.shahabazimi.eliqweather'
@@ -20,11 +22,24 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+        }
         release {
             minifyEnabled false
+            shrinkResources false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    with flavorConfig
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -38,15 +53,14 @@ android {
 dependencies {
 
     implementation project(":data")
-
+    implementation project(":domain")
 
     implementation rootProject.androidx.core
     implementation rootProject.androidx.appcompat
+    implementation rootProject.androidx.viewmodelKtx
 
     implementation rootProject.google.material
 
-    implementation rootProject.dagger.main
-    implementation rootProject.dagger.compiler
 
     testImplementation rootProject.tests.unit
     testImplementation rootProject.tests.arch

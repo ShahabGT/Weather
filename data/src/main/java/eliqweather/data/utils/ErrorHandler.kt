@@ -1,4 +1,6 @@
-package eliqweather.domain.utils
+package eliqweather.data.utils
+
+import eliqweather.domain.models.ErrorEntity
 
 /**
  * @Author: Shahab Azimi

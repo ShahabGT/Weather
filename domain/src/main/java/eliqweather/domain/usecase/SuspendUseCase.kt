@@ -1,4 +1,4 @@
-package eliqweather.domain.utils
+package eliqweather.domain.usecase
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

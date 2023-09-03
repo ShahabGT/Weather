@@ -30,7 +30,6 @@ ext {
     //----- Third party Libraries
     retrofitVersion = '2.9.0'
     okhttpVersion = '4.10.0'
-    daggerVersion = '2.45'
 
     //----- Test Libraries
     testCoreVersion = '1.4.0'
@@ -87,11 +86,6 @@ ext {
             main   : "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion",
             logging: "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion",
             cookie: "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion",
-    ]
-
-    dagger = [
-            main    : "com.google.dagger:dagger:$rootProject.daggerVersion",
-            compiler: "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
     ]
 
     tests = [

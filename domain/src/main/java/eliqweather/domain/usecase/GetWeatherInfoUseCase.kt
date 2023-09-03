@@ -2,8 +2,7 @@ package eliqweather.domain.usecase
 
 import eliqweather.domain.models.WeatherInfoModel
 import eliqweather.domain.repository.WeatherRepository
-import eliqweather.domain.utils.ResultEntity
-import eliqweather.domain.utils.SuspendUseCase
+import eliqweather.domain.models.ResultEntity
 import kotlinx.coroutines.CoroutineDispatcher
 
 /**
