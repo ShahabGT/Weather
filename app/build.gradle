@@ -61,6 +61,7 @@ dependencies {
 
     implementation rootProject.google.material
 
+    implementation rootProject.koin.main
 
     testImplementation rootProject.tests.unit
     testImplementation rootProject.tests.arch
