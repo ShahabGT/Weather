@@ -1,4 +1,4 @@
-package eliqweather.domain.mapper
+package eliqweather.data.mapper
 
 import eliqweather.domain.models.Daily
 import eliqweather.domain.models.DailyWeatherModel
@@ -6,7 +6,7 @@ import eliqweather.domain.models.Hourly
 import eliqweather.domain.models.HourlyWearherModel
 import eliqweather.domain.models.WeatherInfoModel
 import eliqweather.domain.models.WeatherResponse
-import eliqweather.domain.utils.orZero
+import eliqweather.data.utils.orZero
 
 /**
  * @Author: Shahab Azimi

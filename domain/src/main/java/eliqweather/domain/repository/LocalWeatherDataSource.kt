@@ -1,7 +1,7 @@
 package eliqweather.domain.repository
 
 import eliqweather.domain.models.WeatherInfoModel
-import eliqweather.domain.utils.ResultEntity
+import eliqweather.domain.models.ResultEntity
 
 /**
  * @Author: Shahab Azimi

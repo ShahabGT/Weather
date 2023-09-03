@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
  * @Author: Shahab Azimi
  * @Date: 2023 - 09 - 02
  **/
-class RetrofitHelper() {
+class RetrofitHelper {
 
     private lateinit var httpClient: OkHttpClient
 

@@ -1,7 +1,7 @@
 package eliqweather.data.datasource
 
-import eliqweather.domain.utils.ErrorHandler
-import eliqweather.domain.utils.ResultEntity
+import eliqweather.data.utils.ErrorHandler
+import eliqweather.domain.models.ResultEntity
 
 /**
  * @Author: Shahab Azimi
