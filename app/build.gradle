@@ -61,12 +61,14 @@ dependencies {
 
     implementation rootProject.google.material
 
+    implementation rootProject.koin.main
 
     testImplementation rootProject.tests.unit
     testImplementation rootProject.tests.arch
     androidTestImplementation rootProject.tests.arch
     testImplementation rootProject.tests.coroutines
     testImplementation rootProject.tests.mockK
+    testImplementation rootProject.tests.koin
     androidTestImplementation rootProject.tests.coreKtx
     androidTestImplementation rootProject.tests.junitKtx
     androidTestImplementation rootProject.tests.runner

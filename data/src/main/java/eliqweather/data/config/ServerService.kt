@@ -12,7 +12,7 @@ import retrofit2.http.Query
  **/
 interface ServerService {
     @WorkerThread
-    @GET("/forecast")
+    @GET("forecast")
     suspend fun getWeatherInfo(
         @Query("latitude") latitude: String,
         @Query("longitude") longitude: String,

@@ -17,7 +17,7 @@ ext {
     annotationVersion = '1.3.2'
     androidxCore = '1.9.0'
     fragmentVersion = '1.5.5'
-    activityVersion ='1.6.1'
+    activityVersion = '1.6.1'
     kotlinCoroutinesVersion = '1.6.4'
     coroutinePermissionVersion = '2.0.3'
     androidxConstraintlayoutVersion = '2.1.4'
@@ -30,6 +30,7 @@ ext {
     //----- Third party Libraries
     retrofitVersion = '2.9.0'
     okhttpVersion = '4.10.0'
+    koinVersion = '3.4.3'
 
     //----- Test Libraries
     testCoreVersion = '1.4.0'
@@ -50,31 +51,31 @@ ext {
     ]
 
     androidx = [
-            activity          : "androidx.activity:activity:$rootProject.activityVersion",
-            annotation        : "androidx.annotation:annotation:$rootProject.andoridXAnnotationVersion",
-            appcompat         : "androidx.appcompat:appcompat:$rootProject.appCompatVersion",
-            core              : "androidx.core:core-ktx:$rootProject.androidxCore",
-            fragment          : "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion",
-            constraintlayout  : "androidx.constraintlayout:constraintlayout:$rootProject.androidxConstraintlayoutVersion",
-            livedataKtx       : "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.androidxLifecycleVersion",
-            lifecycle         : "androidx.lifecycle:lifecycle-extensions:$rootProject.androidxLifecycleExtensionsVersion",
-            viewmodelKtx      : "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.androidxLifecycleVersion",
-            lifecycleRuntime  : "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.androidxLifecycleVersion",
-            lifecycleCommon   : "androidx.lifecycle:lifecycle-common-java8:$rootProject.androidxLifecycleVersion",
-            navFrag           : "androidx.navigation:navigation-fragment-ktx:$nav_version",
-            navUi             : "androidx.navigation:navigation-ui-ktx:$nav_version",
-            navFeature        : "androidx.navigation:navigation-dynamic-features-fragment:$nav_version",
+            activity        : "androidx.activity:activity:$rootProject.activityVersion",
+            annotation      : "androidx.annotation:annotation:$rootProject.andoridXAnnotationVersion",
+            appcompat       : "androidx.appcompat:appcompat:$rootProject.appCompatVersion",
+            core            : "androidx.core:core-ktx:$rootProject.androidxCore",
+            fragment        : "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion",
+            constraintlayout: "androidx.constraintlayout:constraintlayout:$rootProject.androidxConstraintlayoutVersion",
+            livedataKtx     : "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.androidxLifecycleVersion",
+            lifecycle       : "androidx.lifecycle:lifecycle-extensions:$rootProject.androidxLifecycleExtensionsVersion",
+            viewmodelKtx    : "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.androidxLifecycleVersion",
+            lifecycleRuntime: "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.androidxLifecycleVersion",
+            lifecycleCommon : "androidx.lifecycle:lifecycle-common-java8:$rootProject.androidxLifecycleVersion",
+            navFrag         : "androidx.navigation:navigation-fragment-ktx:$nav_version",
+            navUi           : "androidx.navigation:navigation-ui-ktx:$nav_version",
+            navFeature      : "androidx.navigation:navigation-dynamic-features-fragment:$nav_version",
     ]
 
     tool = [
-            annotation           : "javax.annotation:javax.annotation-api:$rootProject.annotationVersion",
-            coroutinePermission  : "com.sagar:coroutinespermission:$rootProject.coroutinePermissionVersion",
+            annotation         : "javax.annotation:javax.annotation-api:$rootProject.annotationVersion",
+            coroutinePermission: "com.sagar:coroutinespermission:$rootProject.coroutinePermissionVersion",
     ]
 
     google = [
-            material              : "com.google.android.material:material:$rootProject.materialVersion",
-            locationServices      : "com.google.android.gms:play-services-location:$rootProject.locationServiceVersion",
-            gson                  : "com.google.code.gson:gson:$rootProject.googleGsonVersion",
+            material        : "com.google.android.material:material:$rootProject.materialVersion",
+            locationServices: "com.google.android.gms:play-services-location:$rootProject.locationServiceVersion",
+            gson            : "com.google.code.gson:gson:$rootProject.googleGsonVersion",
     ]
 
     retrofit = [
@@ -85,7 +86,7 @@ ext {
     okhttp = [
             main   : "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion",
             logging: "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion",
-            cookie: "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion",
+            cookie : "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion",
     ]
 
     tests = [
@@ -99,7 +100,12 @@ ext {
             runner        : "androidx.test:runner:$rootProject.testRunnerVersion",
             rule          : "androidx.test:rules:$rootProject.testRunnerVersion",
             junit         : "androidx.test.ext:junit:$rootProject.testExtJUnitVersion",
-            truth         : "com.google.truth:truth:$rootProject.truthVersion"
+            truth         : "com.google.truth:truth:$rootProject.truthVersion",
+            koin          : "io.insert-koin:koin-test-junit4:$koinVersion"
+    ]
+
+    koin = [
+            main: "io.insert-koin:koin-android:$koinVersion"
     ]
 
 }
