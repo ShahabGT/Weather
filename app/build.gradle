@@ -59,11 +59,11 @@ dependencies {
     implementation rootProject.androidx.core
     implementation rootProject.androidx.appcompat
     implementation rootProject.androidx.viewmodelKtx
+    implementation rootProject.androidx.constraintlayout
 
     implementation rootProject.google.material
 
     implementation rootProject.koin.main
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     testImplementation rootProject.tests.unit
     testImplementation rootProject.tests.arch
