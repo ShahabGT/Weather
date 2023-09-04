@@ -8,8 +8,10 @@ import eliqweather.domain.repository.LocalWeatherDataSource
 import eliqweather.domain.repository.WeatherDataSource
 import eliqweather.domain.repository.WeatherRepository
 import eliqweather.domain.usecase.GetWeatherInfoUseCase
+import ir.shahabazimi.eliqweather.WeatherViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 /**
@@ -41,6 +43,10 @@ val appModule = module {
 
     factory {
         GetWeatherInfoUseCase(get(), Dispatchers.IO)
+    }
+
+    viewModel{
+        WeatherViewModel(get())
     }
 
 }

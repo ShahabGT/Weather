@@ -35,7 +35,8 @@ android {
     }
 
     buildFeatures {
-        buildConfig = true
+        buildConfig  true
+        viewBinding  true
     }
 
     with flavorConfig
@@ -62,6 +63,7 @@ dependencies {
     implementation rootProject.google.material
 
     implementation rootProject.koin.main
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     testImplementation rootProject.tests.unit
     testImplementation rootProject.tests.arch
