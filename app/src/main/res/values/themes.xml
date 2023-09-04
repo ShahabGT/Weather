@@ -8,8 +8,14 @@
         <item name="Primary_Light">@color/primary_light</item>
         <item name="On_Primary_High_Emphasis">@color/on_main_primary</item>
         <item name="On_Primary_Medium_Emphasis">@color/on_light_primary</item>
+        <item name="Positive_Main">@color/positive_main</item>
+        <item name="Negative_Main">@color/negative_main</item>
         <!--Background Main-->
         <item name="Background_Main">@color/background_main</item>
+
+        <!--Text Color-->
+        <item name="High_Emphasis">@color/high_emphasis</item>
+
 
     </style>
 </resources>

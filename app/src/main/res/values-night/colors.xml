@@ -4,5 +4,8 @@
     <color name="on_main_primary">#1B2028</color>
     <color name="primary_light">#2B3440</color>
     <color name="on_light_primary">#75AAEB</color>
+    <color name="positive_main">#EB758B</color>
+    <color name="negative_main">#00BD92</color>
     <color name="background_main">#1B2029</color>
+    <color name="high_emphasis">#E7EAEF</color>
 </resources>
