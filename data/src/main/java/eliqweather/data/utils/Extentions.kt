@@ -28,3 +28,10 @@ inline fun <reified T> ResultEntity<T>.doOnError(onError: (ErrorEntity) -> Unit)
     }
     return this
 }
+
+inline fun <reified T> ResultEntity<T>.updateOnComplete(callback: () -> Unit): ResultEntity<T> {
+    if (this is ResultEntity.Success || this is ResultEntity.Error) {
+        callback()
+    }
+    return this
+}

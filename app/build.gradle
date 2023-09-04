@@ -35,7 +35,8 @@ android {
     }
 
     buildFeatures {
-        buildConfig = true
+        buildConfig  true
+        viewBinding  true
     }
 
     with flavorConfig
@@ -58,6 +59,7 @@ dependencies {
     implementation rootProject.androidx.core
     implementation rootProject.androidx.appcompat
     implementation rootProject.androidx.viewmodelKtx
+    implementation rootProject.androidx.constraintlayout
 
     implementation rootProject.google.material
 
