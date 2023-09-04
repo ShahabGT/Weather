@@ -60,6 +60,8 @@ dependencies {
     implementation rootProject.androidx.appcompat
     implementation rootProject.androidx.viewmodelKtx
     implementation rootProject.androidx.constraintlayout
+    implementation rootProject.androidx.navFrag
+    implementation rootProject.androidx.navUi
 
     implementation rootProject.google.material
 
