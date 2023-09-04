@@ -5,6 +5,12 @@
     <attr name="Primary_Light" format="color" />
     <attr name="On_Primary_High_Emphasis" format="color" />
     <attr name="On_Primary_Medium_Emphasis" format="color" />
+    <attr name="Positive_Main" format="color"/>
+    <attr name="Negative_Main" format="color"/>
     <!--Background Main-->
     <attr name="Background_Main" format="color" />
+
+    <!--Text Color-->
+    <attr name="High_Emphasis" format="color"/>
+
 </resources>
