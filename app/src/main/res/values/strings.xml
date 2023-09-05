@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Eliq Weather</string>
+    <string name="temperature_format">%s°</string>
 </resources>

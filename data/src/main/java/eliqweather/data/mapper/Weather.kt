@@ -44,7 +44,8 @@ fun Daily.toDomain(): List<DailyWeatherModel> {
                 date = data,
                 maxTemperature = temperature_2m_max[index].orZero(),
                 minTemperature = temperature_2m_min[index].orZero(),
-                weatherCode = getWeatherCondition(weathercode[index].orZero())
+                weatherCode = getWeatherCondition(weathercode[index].orZero()).first,
+                weatherIcon = getWeatherCondition(weathercode[index].orZero()).second
             )
         )
     }
