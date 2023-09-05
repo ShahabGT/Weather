@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="clear">Clear Sky</string>
+    <string name="mainly_clear">Mainly clear</string>
+    <string name="partly_cloudy">Partly Cloudy</string>
+    <string name="overcast">Overcast</string>
+    <string name="fog">Fog</string>
+    <string name="rime_fog">Rime Fog</string>
+    <string name="light_drizzle">Light Drizzle</string>
+    <string name="drizzle">Drizzle</string>
+    <string name="dense_drizzle">Dense Drizzle</string>
+    <string name="light_freezing_drizzle">Light Freezing Drizzle</string>
+    <string name="dense_freezing_drizzle">Dense Freezing Drizzle</string>
+    <string name="slight_rain">Slight Rain</string>
+    <string name="rain">Rain</string>
+    <string name="heavy_rain">Heavy Rain</string>
+    <string name="light_freezing_rain">Freezing Rain</string>
+    <string name="heavy_freezing_rain">Freezing Heavy Rain</string>
+    <string name="light_snow">Light Snow</string>
+    <string name="snow">Snow</string>
+    <string name="heavy_snow">Heavy Snow</string>
+    <string name="snow_grains">Snow Grains</string>
+    <string name="slight_rain_showers">Slight Rain Showers</string>
+    <string name="rain_showers">Rain Showers</string>
+    <string name="heavy_rain_showers">Heavy Rain Showers</string>
+    <string name="light_snow_showers">Light Snow Showers</string>
+    <string name="heavy_snow_showers">Heavy Snow Showers</string>
+    <string name="thunderstorm">Thunderstorm</string>
+    <string name="slight_hail_thunderstorm">Slight Hail Thunderstorm</string>
+    <string name="heavy_hail_thunderstorm">Heavy Hail Thunderstorm</string>
+    <string name="unknown">Unknown</string>
+</resources>

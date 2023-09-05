@@ -28,7 +28,7 @@ sealed class WeatherInfoModel {
         private const val DEFAULT_LATITUDE = 57.70
         private const val DEFAULT_LONGITUDE = 11.89
         private const val DEFAULT_HOURLY = "temperature_2m,precipitation_probability"
-        private const val DEFAULT_DAILY = "temperature_2m_max,temperature_2m_min"
+        private const val DEFAULT_DAILY = "temperature_2m_max,temperature_2m_min,weathercode"
         private const val DEFAULT_TIMEZONE = "auto"
     }
 }

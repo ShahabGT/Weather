@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ir.shahabazimi.eliqweather.databinding.FragmentMainBinding
 
+/**
+ * @Author: Shahab Azimi
+ * @Date: 2023 - 09 - 04
+ **/
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
