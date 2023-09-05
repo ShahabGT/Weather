@@ -71,7 +71,7 @@ class MainFragment : Fragment() {
                     )
                     dateText.text = response.dailyWeather.first().date.convertToReadableDate()
                     weatherConditionText.text = getString(response.dailyWeather.first().weatherCode)
-                    weatherIcon.setImageResource(response.dailyWeather.first().weatherIcon)
+                    weatherIcon.setAnimation(response.dailyWeather.first().weatherIcon)
                     adapter.setData(response.dailyWeather)
                 }
             }

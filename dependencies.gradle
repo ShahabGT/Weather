@@ -31,6 +31,7 @@ ext {
     retrofitVersion = '2.9.0'
     okhttpVersion = '4.10.0'
     koinVersion = '3.4.3'
+    lottieVersion = '6.1.0'
 
     //----- Test Libraries
     testCoreVersion = '1.4.0'
@@ -70,6 +71,7 @@ ext {
     tool = [
             annotation         : "javax.annotation:javax.annotation-api:$rootProject.annotationVersion",
             coroutinePermission: "com.sagar:coroutinespermission:$rootProject.coroutinePermissionVersion",
+            lottie             : "com.airbnb.android:lottie:$rootProject.lottieVersion"
     ]
 
     google = [

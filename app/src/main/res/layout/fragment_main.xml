@@ -57,7 +57,7 @@
                 tools:text="Saturday, Nov 28" />
 
 
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/weatherIcon"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
@@ -65,7 +65,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dateText"
-                tools:src="@drawable/cloudy" />
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true" />
 
             <View
                 android:layout_width="0dp"
@@ -120,5 +121,20 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/Primary_Light"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading" />
+
+    </LinearLayout>
 </FrameLayout>
