@@ -1,0 +1,27 @@
+package ir.shahabazimi.eliqweather.adapter
+
+import androidx.recyclerview.widget.DiffUtil
+import eliqweather.domain.models.DailyWeatherModel
+
+
+/**
+ * @Author: Shahab Azimi
+ * @Date: 2023 - 09 - 05
+ **/
+class WeatherDiffCallback(
+    private val oldWeatherList: List<DailyWeatherModel>,
+    private val newWeatherList: List<DailyWeatherModel>
+) : DiffUtil.Callback() {
+
+    override fun getOldListSize() =
+        oldWeatherList.size
+
+    override fun getNewListSize() =
+        newWeatherList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+        oldWeatherList[oldItemPosition].date == newWeatherList[newItemPosition].date
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+        oldWeatherList[oldItemPosition] == newWeatherList[newItemPosition]
+}

@@ -4,6 +4,7 @@ import eliqweather.domain.models.ErrorEntity
 import eliqweather.domain.models.ResultEntity
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 /**
@@ -45,5 +46,36 @@ fun String?.convertToReadableDate(): String {
     return date?.let { outputFormatter.format(it) } ?: ""
 }
 
+fun String?.convertToDayDate(): String {
+    return if (dateIsToday(this.orEmpty())) {
+        "Today"
+    } else {
+        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this)
+        val outputFormatter = SimpleDateFormat("EEEE", Locale.getDefault())
+        date?.let { outputFormatter.format(it) } ?: ""
+    }
+}
+
 fun getHourOfDay() =
     Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+
+private fun getTodayDate(): String {
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH) + 1
+    val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
+    return "$year-$month-$dayOfMonth"
+}
+
+fun dateIsToday(date: String): Boolean {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    val today = getTodayDate()
+    return try {
+        val date1 = dateFormat.parse(today)
+        val date2 = dateFormat.parse(date)
+        !date1?.before(date2)!! && !date1.after(date2)
+    } catch (e: Exception) {
+        false
+    }
+}

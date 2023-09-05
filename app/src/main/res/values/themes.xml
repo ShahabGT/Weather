@@ -3,6 +3,9 @@
     <!-- Base application theme. -->
     <style name="Theme.EliqWeather" parent="Theme.Material3.DayNight.NoActionBar">
 
+        <item name="android:statusBarColor">@color/primary_light</item>
+        <item name="android:windowLightStatusBar">true</item>
+
         <!--Primary-->
         <item name="Primary_Main">@color/primary_main</item>
         <item name="Primary_Light">@color/primary_light</item>

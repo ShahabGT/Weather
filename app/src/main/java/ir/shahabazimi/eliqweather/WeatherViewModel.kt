@@ -29,8 +29,8 @@ class WeatherViewModel(
 
     fun getWeatherInfo(
         isOnline: Boolean = false,
-        latitude : Double= DEFAULT_LATITUDE,
-        longitude : Double = DEFAULT_LONGITUDE,
+        latitude: Double = DEFAULT_LATITUDE,
+        longitude: Double = DEFAULT_LONGITUDE,
     ) =
         viewModelScope.launch {
             _responseLoading.value = true
@@ -41,7 +41,8 @@ class WeatherViewModel(
                     longitude = longitude,
                     hourly = DEFAULT_HOURLY,
                     daily = DEFAULT_DAILY,
-                    timezone = DEFAULT_TIMEZONE
+                    timezone = DEFAULT_TIMEZONE,
+                    forecastDays = DEFAULT_FORECAST_DAYS
                 )
             ).updateOnSuccess {
                 _response.value = it
@@ -54,11 +55,12 @@ class WeatherViewModel(
 
 
     companion object {
-        private const val DEFAULT_LATITUDE = 57.70
-        private const val DEFAULT_LONGITUDE = 11.89
+        private const val DEFAULT_LATITUDE = 35.7219
+        private const val DEFAULT_LONGITUDE = 51.3347
         private const val DEFAULT_HOURLY = "temperature_2m,precipitation_probability"
         private const val DEFAULT_DAILY = "temperature_2m_max,temperature_2m_min,weathercode"
         private const val DEFAULT_TIMEZONE = "auto"
+        private const val DEFAULT_FORECAST_DAYS = 16
     }
 
 
