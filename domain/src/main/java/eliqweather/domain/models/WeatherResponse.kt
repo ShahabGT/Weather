@@ -8,14 +8,10 @@ import com.google.gson.annotations.SerializedName
  **/
 data class WeatherResponse(
     val daily: Daily,
-    @SerializedName("daily_units")
-    val dailyUnits: DailyUnits,
     val elevation: Double,
     @SerializedName("generationtime_ms")
     val generationTime: Double,
     val hourly: Hourly,
-    @SerializedName("hourly_units")
-    val hourlyUnits: HourlyUnits,
     val latitude: Double,
     val longitude: Double,
     val timezone: String,
