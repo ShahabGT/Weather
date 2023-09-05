@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import eliqweather.data.utils.convertToReadableDate
 import eliqweather.data.utils.getHourOfDay
+import eliqweather.data.utils.visibilityState
 import ir.shahabazimi.eliqweather.R
 import ir.shahabazimi.eliqweather.WeatherViewModel
 import ir.shahabazimi.eliqweather.adapter.WeatherRecyclerViewAdapter
@@ -52,12 +53,22 @@ class MainFragment : Fragment() {
 
     private fun observeWeatherError() =
         viewModel.responseError.observe(viewLifecycleOwner) { error ->
+            with(binding) {
+                errorView.visibilityState(true)
+                errorText.text = error
+                retryButton.setOnClickListener {
+                    viewModel.getWeatherInfo()
+                }
+            }
 
         }
 
     private fun observeWeatherLoading() =
         viewModel.responseLoading.observe(viewLifecycleOwner) { loading ->
-
+            with(binding) {
+                errorView.visibilityState(false)
+                loadingView.visibilityState(loading)
+            }
         }
 
     private fun observeWeatherResponse() =

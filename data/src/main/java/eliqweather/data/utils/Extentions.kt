@@ -1,5 +1,6 @@
 package eliqweather.data.utils
 
+import android.view.View
 import eliqweather.domain.models.ErrorEntity
 import eliqweather.domain.models.ResultEntity
 import java.text.SimpleDateFormat
@@ -78,4 +79,8 @@ fun dateIsToday(date: String): Boolean {
     } catch (e: Exception) {
         false
     }
+}
+
+fun View.visibilityState(visible: Boolean) {
+    this.visibility = if (visible) View.VISIBLE else View.GONE
 }
