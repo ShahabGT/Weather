@@ -9,6 +9,7 @@ import eliqweather.data.utils.convertToReadableDate
 import eliqweather.data.utils.getHourOfDay
 import ir.shahabazimi.eliqweather.R
 import ir.shahabazimi.eliqweather.WeatherViewModel
+import ir.shahabazimi.eliqweather.adapter.WeatherRecyclerViewAdapter
 import ir.shahabazimi.eliqweather.databinding.FragmentMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,6 +21,7 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private val viewModel: WeatherViewModel by viewModel()
+    private lateinit var adapter: WeatherRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,14 +39,15 @@ class MainFragment : Fragment() {
 
 
     private fun init() {
-        viewModel.getWeatherInfo(isOnline = false)
+        viewModel.getWeatherInfo(isOnline = true)
         observeWeatherError()
         observeWeatherLoading()
         observeWeatherResponse()
     }
 
-    private fun initViews() {
-
+    private fun initViews() = with(binding) {
+        adapter = WeatherRecyclerViewAdapter()
+        dailyWeatherRecycler.adapter = adapter
     }
 
     private fun observeWeatherError() =
@@ -67,8 +70,9 @@ class MainFragment : Fragment() {
                         response.hourlyWeather[getHourOfDay()].temperature.toString()
                     )
                     dateText.text = response.dailyWeather.first().date.convertToReadableDate()
-                    weatherCodeText.text = getString(response.dailyWeather.first().weatherCode)
+                    weatherConditionText.text = getString(response.dailyWeather.first().weatherCode)
                     weatherIcon.setImageResource(response.dailyWeather.first().weatherIcon)
+                    adapter.setData(response.dailyWeather)
                 }
             }
         }

@@ -62,10 +62,10 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="30dp"
-                android:src="@drawable/cloudy"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dateText" />
+                app:layout_constraintTop_toBottomOf="@id/dateText"
+                tools:src="@drawable/cloudy" />
 
             <View
                 android:layout_width="0dp"
@@ -74,13 +74,13 @@
                 android:layout_marginEnd="6dp"
                 android:alpha="0.5"
                 android:background="?attr/Primary_Main"
-                app:layout_constraintBottom_toBottomOf="@id/weatherCodeText"
-                app:layout_constraintEnd_toStartOf="@id/weatherCodeText"
+                app:layout_constraintBottom_toBottomOf="@id/weatherConditionText"
+                app:layout_constraintEnd_toStartOf="@id/weatherConditionText"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/weatherCodeText" />
+                app:layout_constraintTop_toTopOf="@id/weatherConditionText" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/weatherCodeText"
+                android:id="@+id/weatherConditionText"
                 style="@style/TextAppearance.AppCompat.Display1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,17 +99,20 @@
                 android:layout_marginTop="10dp"
                 android:alpha="0.5"
                 android:background="?attr/Primary_Main"
-                app:layout_constraintBottom_toBottomOf="@id/weatherCodeText"
+                app:layout_constraintBottom_toBottomOf="@id/weatherConditionText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/weatherCodeText"
-                app:layout_constraintTop_toTopOf="@id/weatherCodeText" />
+                app:layout_constraintStart_toEndOf="@id/weatherConditionText"
+                app:layout_constraintTop_toTopOf="@id/weatherConditionText" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dailyWeatherRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weatherCodeText"
+                app:layout_constraintTop_toBottomOf="@id/weatherConditionText"
                 tools:listitem="@layout/weather_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

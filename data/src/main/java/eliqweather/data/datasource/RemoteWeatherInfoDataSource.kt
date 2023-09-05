@@ -19,11 +19,12 @@ class RemoteWeatherInfoDataSource constructor(
         safeRequest {
             with(request) {
                 retrofitHelper.serverService.getWeatherInfo(
-                    latitude = latitude.toString(),
-                    longitude = longitude.toString(),
+                    latitude = latitude,
+                    longitude = longitude,
                     daily = daily,
                     hourly = hourly,
-                    timezone = timezone
+                    timezone = timezone,
+                    forecastDays = forecastDays
                 ).toDomain()
             }
         }

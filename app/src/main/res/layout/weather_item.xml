@@ -8,26 +8,39 @@
     android:layout_marginTop="16dp">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/dateItemText"
+        android:id="@+id/dayItemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
         android:gravity="start"
         android:textColor="?attr/High_Emphasis"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Saturday" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/conditionItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:gravity="start"
+        android:textColor="?attr/High_Emphasis"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dayItemText"
+        tools:text="Saturday" />
+
 
     <ImageView
-        app:tint="?attr/High_Emphasis"
-        android:src="@drawable/cloudy_vector"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/iconItemImageView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/highTemperatureItemText"
@@ -40,6 +53,7 @@
         android:textColor="?attr/High_Emphasis"
         android:textSize="18sp"
         app:drawableTint="?attr/Positive_Main"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="33°" />
@@ -56,6 +70,7 @@
         android:textColor="?attr/High_Emphasis"
         android:textSize="18sp"
         app:drawableTint="?attr/Negative_Main"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@id/highTemperatureItemText"
         app:layout_constraintTop_toTopOf="parent"
@@ -70,7 +85,7 @@
         android:background="?attr/Primary_Main"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dateItemText" />
+        app:layout_constraintTop_toBottomOf="@id/conditionItemText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
