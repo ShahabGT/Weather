@@ -63,6 +63,8 @@ dependencies {
     implementation rootProject.androidx.navFrag
     implementation rootProject.androidx.navUi
 
+    implementation rootProject.tool.lottie
+
     implementation rootProject.google.material
 
     implementation rootProject.koin.main
