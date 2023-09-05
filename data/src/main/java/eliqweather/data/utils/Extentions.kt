@@ -1,5 +1,7 @@
 package eliqweather.data.utils
 
+import android.content.Context
+import android.content.pm.PackageManager
 import android.view.View
 import eliqweather.domain.models.ErrorEntity
 import eliqweather.domain.models.ResultEntity

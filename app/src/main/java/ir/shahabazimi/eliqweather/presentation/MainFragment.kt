@@ -1,9 +1,18 @@
 package ir.shahabazimi.eliqweather.presentation
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import eliqweather.data.utils.convertToReadableDate
 import eliqweather.data.utils.getHourOfDay
@@ -14,6 +23,7 @@ import ir.shahabazimi.eliqweather.adapter.WeatherRecyclerViewAdapter
 import ir.shahabazimi.eliqweather.databinding.FragmentMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 /**
  * @Author: Shahab Azimi
  * @Date: 2023 - 09 - 04
@@ -23,6 +33,13 @@ class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private val viewModel: WeatherViewModel by viewModel()
     private lateinit var adapter: WeatherRecyclerViewAdapter
+    private val locationPermissionRequest = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { permissions ->
+        if (permissions) {
+            //todo handle permission
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +66,27 @@ class MainFragment : Fragment() {
     private fun initViews() = with(binding) {
         adapter = WeatherRecyclerViewAdapter()
         dailyWeatherRecycler.adapter = adapter
+        scrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            if (scrollY > oldScrollY) {
+                locationFloatingButton.hide()
+            } else {
+                locationFloatingButton.show()
+            }
+        })
+
+        locationFloatingButton.setOnClickListener {
+            if (!isLocationPermissionGranted())
+                locationPermissionRequest.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+            else
+                Toast.makeText(context, "granted", Toast.LENGTH_SHORT).show()
+        }
     }
+
+    private fun isLocationPermissionGranted() =
+        ContextCompat.checkSelfPermission(
+            requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+
 
     private fun observeWeatherError() =
         viewModel.responseError.observe(viewLifecycleOwner) { error ->
@@ -84,9 +121,15 @@ class MainFragment : Fragment() {
                     weatherConditionText.text = getString(response.dailyWeather.first().weatherCode)
                     weatherIcon.setAnimation(response.dailyWeather.first().weatherIcon)
                     adapter.setData(response.dailyWeather)
+
                 }
             }
         }
+
+    private fun openSettingsPage() {
+        val uri = Uri.fromParts("package", requireContext().packageName, null)
+        startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply { data = uri })
+    }
 
 
 }
