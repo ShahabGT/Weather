@@ -2,6 +2,9 @@ package eliqweather.data.utils
 
 import eliqweather.domain.models.ErrorEntity
 import eliqweather.domain.models.ResultEntity
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 /**
  * @Author: Shahab Azimi
@@ -35,3 +38,12 @@ inline fun <reified T> ResultEntity<T>.updateOnComplete(callback: () -> Unit): R
     }
     return this
 }
+
+fun String?.convertToReadableDate(): String {
+    val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this)
+    val outputFormatter = SimpleDateFormat("EEEE, MMM dd", Locale.getDefault())
+    return date?.let { outputFormatter.format(it) } ?: ""
+}
+
+fun getHourOfDay() =
+    Calendar.getInstance().get(Calendar.HOUR_OF_DAY)

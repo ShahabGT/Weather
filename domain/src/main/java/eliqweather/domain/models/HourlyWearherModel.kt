@@ -5,7 +5,7 @@ package eliqweather.domain.models
  * @Date: 2023 - 09 - 02
  **/
 data class HourlyWearherModel(
-    private val time: String? = null,
-    private val temperature: Double = 0.0,
-    private val precipitation: Int = 0,
+    val time: String? = null,
+    val temperature: Double = 0.0,
+    val precipitation: Int = 0,
 )
