@@ -29,4 +29,8 @@
     <string name="slight_hail_thunderstorm">Slight Hail Thunderstorm</string>
     <string name="heavy_hail_thunderstorm">Heavy Hail Thunderstorm</string>
     <string name="unknown">Unknown</string>
+
+    <string name="no_intent">No Internet Available, Check Your Connection</string>
+    <string name="unknown_error">Something Went Wrong, Try Again…</string>
+    <string name="server_error">Something Went Wrong, Try Again in a Moment…</string>
 </resources>
