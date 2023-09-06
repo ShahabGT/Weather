@@ -19,7 +19,7 @@ sealed class WeatherInfoModel {
     data class Response(
         val latitude: Double = 0.0,
         val longitude: Double = 0.0,
-        val timezone: String? = null,
+        var timezone: String? = null,
         val generationTime: Double = 0.0,
         val elevation: Double = 0.0,
         val hourlyWeather: List<HourlyWearherModel> = listOf(),

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".EliqApplication"
@@ -17,8 +18,8 @@
         tools:targetApi="31">
         <activity
             android:name=".presentation.MainActivity"
-            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>

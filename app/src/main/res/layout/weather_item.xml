@@ -14,8 +14,7 @@
         android:fontFamily="monospace"
         android:gravity="start"
         android:textColor="?attr/High_Emphasis"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Saturday" />
@@ -37,10 +36,10 @@
         android:id="@+id/iconItemImageView"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/conditionItemText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dayItemText"
         app:lottie_autoPlay="true"
         app:lottie_loop="true" />
 
@@ -53,11 +52,11 @@
         android:fontFamily="monospace"
         android:gravity="start"
         android:textColor="?attr/High_Emphasis"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:drawableTint="?attr/Positive_Main"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/conditionItemText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dayItemText"
         tools:text="33°" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -70,12 +69,12 @@
         android:fontFamily="monospace"
         android:gravity="start"
         android:textColor="?attr/High_Emphasis"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:drawableTint="?attr/Negative_Main"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/conditionItemText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@id/highTemperatureItemText"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dayItemText"
         tools:text="15°" />
 
     <View

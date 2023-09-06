@@ -26,6 +26,7 @@ ext {
     materialVersion = '1.9.0'
     locationServiceVersion = '21.0.1'
     googleGsonVersion = '2.10.1'
+    swipeRefreshVersion = '1.2.0-alpha01'
 
     //----- Third party Libraries
     retrofitVersion = '2.9.0'
@@ -66,6 +67,7 @@ ext {
             navFrag         : "androidx.navigation:navigation-fragment-ktx:$nav_version",
             navUi           : "androidx.navigation:navigation-ui-ktx:$nav_version",
             navFeature      : "androidx.navigation:navigation-dynamic-features-fragment:$nav_version",
+            swipeRefresh    : "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.swipeRefreshVersion"
     ]
 
     tool = [

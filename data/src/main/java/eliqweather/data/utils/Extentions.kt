@@ -5,7 +5,6 @@ import eliqweather.domain.models.ErrorEntity
 import eliqweather.domain.models.ResultEntity
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 /**
@@ -52,7 +51,7 @@ fun String?.convertToDayDate(): String {
         "Today"
     } else {
         val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this)
-        val outputFormatter = SimpleDateFormat("EEEE", Locale.getDefault())
+        val outputFormatter = SimpleDateFormat("EEEE, MMM dd", Locale.getDefault())
         date?.let { outputFormatter.format(it) } ?: ""
     }
 }
@@ -84,3 +83,7 @@ fun dateIsToday(date: String): Boolean {
 fun View.visibilityState(visible: Boolean) {
     this.visibility = if (visible) View.VISIBLE else View.GONE
 }
+
+fun Double?.ifZero(value: Double) = if (this == null || this == 0.0) value else this
+
+fun isLocationEmpty(lat:Double,lon:Double)= lat!=0.0 && lon!=0.0
