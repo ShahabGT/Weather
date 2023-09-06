@@ -1,6 +1,7 @@
 package eliqweather.data.utils
 
 import android.content.Context
+import eliqweather.data.R
 import eliqweather.domain.models.ErrorEntity
 import retrofit2.HttpException
 import java.io.ByteArrayOutputStream
@@ -8,6 +9,10 @@ import java.io.IOException
 import java.net.MalformedURLException
 import java.net.UnknownHostException
 
+/**
+ * @Author: Shahab Azimi
+ * @Date: 2023 - 09 - 02
+ **/
 class GeneralErrorHandlerImpl constructor(
     private val context: Context
 ) : ErrorHandler {
@@ -16,15 +21,17 @@ class GeneralErrorHandlerImpl constructor(
         return when (throwable) {
 
             is UnknownHostException -> ErrorEntity.UnknownHost.apply {
-                message = "" //no_network_access
+                message = context.getString(R.string.no_intent)
             }
 
             is MalformedURLException -> ErrorEntity.Network.apply {
-                message = "" // error_get_server_error
+                message = context.getString(R.string.server_error)
+
             }
 
             is IOException -> ErrorEntity.Network.apply {
-                message = "" //error_get_server_error
+                message = context.getString(R.string.server_error)
+
             }
 
             is HttpException -> convertHttpErrorBody(
@@ -45,10 +52,9 @@ class GeneralErrorHandlerImpl constructor(
         )
     }
 
-    fun getErrorMessage(throwable: HttpException) =
+    private fun getErrorMessage(throwable: HttpException) =
         getErrorResponseHttpException(throwable)?.let(::getErrorMessageFromByteArr).ifNullOrEmpty(
-            ""
-            //error_get_server_error
+            context.getString(R.string.server_error)
         )
 
 
@@ -71,11 +77,9 @@ class GeneralErrorHandlerImpl constructor(
         return try {
             data.toString(Charsets.UTF_8)
         } catch (e: Exception) {
-            ""
-            // error_get_server_error
+            context.getString(R.string.server_error)
         }.ifNullOrEmpty(
-            ""
-            //error_get_unknown_error
+            context.getString(R.string.unknown_error)
         )
     }
 
