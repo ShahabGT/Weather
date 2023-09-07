@@ -44,6 +44,7 @@ dependencies {
     implementation project(":domain")
 
     implementation rootProject.androidx.annotation
+    implementation rootProject.androidx.livedataKtx
 
     implementation rootProject.retrofit.main
     implementation rootProject.retrofit.converter

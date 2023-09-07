@@ -1,11 +1,16 @@
 package eliqweather.data.utils
 
 import android.view.View
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import eliqweather.domain.models.ErrorEntity
 import eliqweather.domain.models.ResultEntity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
 /**
  * @Author: Shahab Azimi
@@ -28,7 +33,7 @@ inline fun <reified T> ResultEntity<T>.updateOnSuccess(callback: (T) -> Unit): R
 
 inline fun <reified T> ResultEntity<T>.doOnError(onError: (ErrorEntity) -> Unit): ResultEntity<T> {
     if (this is ResultEntity.Error) {
-        onError.invoke(this.error)
+        this.error?.let { onError.invoke(it) }
     }
     return this
 }
@@ -87,3 +92,30 @@ fun View.visibilityState(visible: Boolean) {
 fun Double?.ifZero(value: Double) = if (this == null || this == 0.0) value else this
 
 fun isLocationEmpty(lat:Double,lon:Double)= lat!=0.0 && lon!=0.0
+
+fun <T> LiveData<T>.getOrAwaitValue(
+    time: Long = 2,
+    timeUnit: TimeUnit = TimeUnit.SECONDS,
+    afterObserve: () -> Unit = {}
+): T {
+    var data: T? = null
+    val latch = CountDownLatch(1)
+    val observer = object : Observer<T> {
+        override fun onChanged(o: T?) {
+            data = o
+            latch.countDown()
+            this@getOrAwaitValue.removeObserver(this)
+        }
+    }
+    this.observeForever(observer)
+
+    afterObserve.invoke()
+
+    if (!latch.await(time, timeUnit)) {
+        this.removeObserver(observer)
+        throw TimeoutException("LiveData value was never set.")
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    return data as T
+}
