@@ -32,6 +32,7 @@ class WeatherRecyclerViewAdapter :
                 item.minTemperature.toString()
             )
             iconItemImageView.setAnimation(item.weatherIcon)
+            iconItemImageView.playAnimation()
             conditionItemText.text = binding.root.context.getString(
                 item.weatherCode
             )

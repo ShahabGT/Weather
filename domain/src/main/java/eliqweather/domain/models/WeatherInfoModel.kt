@@ -13,7 +13,7 @@ sealed class WeatherInfoModel {
         val hourly: String = "",
         val daily: String = "",
         val timezone: String = "",
-        val forecastDays : Int =7
+        val forecastDays: Int = 10
     ) : WeatherInfoModel()
 
     data class Response(
@@ -24,16 +24,6 @@ sealed class WeatherInfoModel {
         val elevation: Double = 0.0,
         val hourlyWeather: List<HourlyWearherModel> = listOf(),
         val dailyWeather: List<DailyWeatherModel> = listOf()
-    ) : WeatherInfoModel() {
-        override fun equals(other: Any?): Boolean {
-            val otherData = other as Response
-            return latitude == otherData.latitude &&
-                    longitude == otherData.longitude &&
-                    timezone == otherData.timezone &&
-                    generationTime == otherData.generationTime &&
-                    elevation == otherData.elevation
-
-        }
-    }
+    ) : WeatherInfoModel()
 
 }
