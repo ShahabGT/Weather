@@ -5,10 +5,10 @@
     android:id="@+id/main_nav"
     app:startDestination="@id/mainFragment">
 
-
     <fragment
         android:id="@+id/mainFragment"
         android:name="ir.shahabazimi.eliqweather.presentation.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+
 </navigation>

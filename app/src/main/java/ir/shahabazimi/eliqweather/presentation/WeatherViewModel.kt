@@ -1,4 +1,4 @@
-package ir.shahabazimi.eliqweather
+package ir.shahabazimi.eliqweather.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

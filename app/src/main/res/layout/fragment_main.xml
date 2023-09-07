@@ -62,7 +62,6 @@
                     app:layout_constraintTop_toBottomOf="@id/locationText"
                     tools:text="Saturday, Nov 28" />
 
-
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/weatherIcon"
                     android:layout_width="150dp"
@@ -72,7 +71,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/dateText"
                     app:lottie_autoPlay="true"
-                    app:lottie_loop="true" />
+                    app:lottie_loop="true"
+                    app:lottie_renderMode="hardware" />
 
                 <View
                     android:layout_width="0dp"
