@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -102,16 +103,30 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                 } ?: viewModel.getWeatherInfo()
             }
 
-
+    @Suppress("DEPRECATION")
     private fun handleLocation(location: Location) {
         val latitude = location.latitude
         val longitude = location.longitude
-        val geocoder = Geocoder(requireContext(), Locale.getDefault())
-        val address = geocoder.getFromLocation(latitude, longitude, 1)?.first()
-        if (address != null)
-            viewModel.address = address.locality
 
-        viewModel.setLocation(latitude, longitude)
+        try {
+            val geocoder = Geocoder(requireContext(), Locale.getDefault())
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                geocoder.getFromLocation(latitude, longitude, 1) { addresses ->
+                    addresses.first()?.let {
+                        viewModel.address = it.locality
+                    }
+                    viewModel.setLocation(latitude, longitude)
+                }
+            } else {
+                val address = geocoder.getFromLocation(latitude, longitude, 1)?.first()
+                if (address?.locality != null)
+                    viewModel.address = address.locality
+                viewModel.setLocation(latitude, longitude)
+            }
+        } catch (e: Exception) {
+            viewModel.setLocation(latitude, longitude)
+        }
+
     }
 
     private fun observeWeatherError() =

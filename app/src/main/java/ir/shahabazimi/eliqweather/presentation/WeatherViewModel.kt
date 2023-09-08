@@ -16,7 +16,7 @@ class WeatherViewModel(
     private val getWeatherInfoUseCase: GetWeatherInfoUseCase
 ) : ViewModel() {
 
-    var address: String = ""
+    var address: String? = null
 
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
@@ -54,7 +54,7 @@ class WeatherViewModel(
                 )
             ).updateOnSuccess {
                 _response.value = it.apply {
-                    if (address.isNotBlank())
+                    if (!address.isNullOrBlank())
                         it.timezone = address
                 }
             }.doOnError {
