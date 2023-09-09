@@ -11,13 +11,16 @@ import androidx.viewbinding.ViewBinding
  * @Author: Shahab Azimi
  * @Date: 2023 - 09 - 07
  **/
+//BaseFragment is used mainly for inflating the Fragment layout
 abstract class BaseFragment<B : ViewBinding> : Fragment() {
 
     val binding get() = _binding!!
     private var _binding: B? = null
 
+    //this open function is optional to implement, should use for initializing the views
     protected open fun setupViews(savedInstanceState: Bundle?) {}
 
+    //this open function is optional to implement, should use for observing and calling viewModel functions
     protected open fun initLogic() {}
 
     abstract fun bindView(inflater: LayoutInflater, container: ViewGroup?): ViewBinding

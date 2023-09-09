@@ -6,6 +6,7 @@ import eliqweather.data.R
  * @Author: Shahab Azimi
  * @Date: 2023 - 09 - 04
  **/
+//converts the weather code to a pair of title and animation
 fun getWeatherCondition(code: Int) =
     when (code) {
         0 -> Pair(R.string.clear, R.raw.sunny)

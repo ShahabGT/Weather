@@ -13,6 +13,7 @@ import eliqweather.domain.models.WeatherResponse
  * @Date: 2023 - 09 - 02
  **/
 
+//converts the api call response to WeatherInfo Model
 fun WeatherResponse.toDomain() = WeatherInfoModel.Response(
     latitude = latitude,
     longitude = longitude,
@@ -45,8 +46,8 @@ fun Daily.toDomain(): List<DailyWeatherModel> {
                 date = data,
                 maxTemperature = temperature_2m_max[index].orZero(),
                 minTemperature = temperature_2m_min[index].orZero(),
-                weatherCode = getWeatherCondition(weathercode[index].orZero()).first,
-                weatherIcon = getWeatherCondition(weathercode[index].orZero()).second
+                weatherCode = getWeatherCondition(weathercode[index].orZero()).first, // used getWeatherCondition for getting the corresponding weather code title
+                weatherIcon = getWeatherCondition(weathercode[index].orZero()).second// used getWeatherCondition for getting the corresponding weather code animation
             )
         )
     }

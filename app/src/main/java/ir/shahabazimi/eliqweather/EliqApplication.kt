@@ -13,6 +13,7 @@ class EliqApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        //initializing koin for app
         startKoin {
             androidContext(this@EliqApplication)
             modules(appModule)

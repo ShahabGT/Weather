@@ -13,11 +13,13 @@ import java.net.UnknownHostException
  * @Author: Shahab Azimi
  * @Date: 2023 - 09 - 02
  **/
+//implementation of ErrorHandler
 class GeneralErrorHandlerImpl constructor(
     private val context: Context
 ) : ErrorHandler {
     override fun getError(throwable: Throwable): ErrorEntity {
 
+        //comparing each throwable and returning a appropriate message
         return when (throwable) {
 
             is UnknownHostException -> ErrorEntity.UnknownHost.apply {
