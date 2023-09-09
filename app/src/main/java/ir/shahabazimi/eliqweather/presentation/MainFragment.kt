@@ -8,14 +8,14 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
@@ -26,7 +26,6 @@ import eliqweather.data.utils.convertToReadableDate
 import eliqweather.data.utils.getHourOfDay
 import eliqweather.data.utils.visibilityState
 import ir.shahabazimi.eliqweather.R
-import ir.shahabazimi.eliqweather.WeatherViewModel
 import ir.shahabazimi.eliqweather.adapter.WeatherRecyclerViewAdapter
 import ir.shahabazimi.eliqweather.databinding.FragmentMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,53 +36,41 @@ import java.util.Locale
  * @Author: Shahab Azimi
  * @Date: 2023 - 09 - 04
  **/
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment<FragmentMainBinding>() {
 
-    private lateinit var binding: FragmentMainBinding
     private val viewModel: WeatherViewModel by viewModel()
     private lateinit var adapter: WeatherRecyclerViewAdapter
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private val resolutionForResult =
+    private var resolutionForResult =
         registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
-            if (result.resultCode == RESULT_OK) requestLocation()
-
+            if (result.resultCode == RESULT_OK) getLocation()
         }
 
-    private val locationPermissionRequest = registerForActivityResult(
+    private var locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { permission ->
         if (permission)
-            if (isLocationServiceEnabled()) requestLocation()
+            if (isLocationServiceEnabled()) getLocation()
             else requestLocationServices()
+        else
+            Toast.makeText(context, R.string.location_permission, Toast.LENGTH_SHORT).show()
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        init()
-        initViews()
-    }
+    override fun bindView(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentMainBinding.inflate(inflater, container, false)
 
 
-    private fun init() {
+    override fun initLogic() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-        viewModel.getWeatherInfo()
         observeWeatherError()
         observeWeatherLoading()
         observeWeatherResponse()
-        handleLocationPermission()
+        viewModel.getWeatherInfo()
     }
 
-    private fun initViews() = with(binding) {
+    override fun setupViews(savedInstanceState: Bundle?) = with(binding) {
         adapter = WeatherRecyclerViewAdapter()
         dailyWeatherRecycler.adapter = adapter
         refreshLayout.setOnRefreshListener {
@@ -92,9 +79,10 @@ class MainFragment : Fragment() {
     }
 
     private fun handleLocationPermission() {
+        binding.refreshLayout.isRefreshing = false
         if (locationPermissionGranted())
             if (isLocationServiceEnabled())
-                requestLocation()
+                getLocation()
             else
                 requestLocationServices()
         else
@@ -107,24 +95,38 @@ class MainFragment : Fragment() {
 
 
     @SuppressLint("MissingPermission")
-    private fun requestLocation() =
+    private fun getLocation() =
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 location?.let {
                     handleLocation(location)
-                }
+                } ?: viewModel.getWeatherInfo()
             }
 
-
+    @Suppress("DEPRECATION")
     private fun handleLocation(location: Location) {
         val latitude = location.latitude
         val longitude = location.longitude
-        val geocoder = Geocoder(requireContext(), Locale.getDefault())
-        val address = geocoder.getFromLocation(latitude, longitude, 1)?.first()
-        if (address != null)
-            viewModel.address = address.locality
 
-        viewModel.setLocation(latitude, longitude)
+        try {
+            val geocoder = Geocoder(requireContext(), Locale.getDefault())
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                geocoder.getFromLocation(latitude, longitude, 1) { addresses ->
+                    addresses.first()?.let {
+                        viewModel.address = it.locality
+                    }
+                    viewModel.setLocation(latitude, longitude)
+                }
+            } else {
+                val address = geocoder.getFromLocation(latitude, longitude, 1)?.first()
+                if (address?.locality != null)
+                    viewModel.address = address.locality
+                viewModel.setLocation(latitude, longitude)
+            }
+        } catch (e: Exception) {
+            viewModel.setLocation(latitude, longitude)
+        }
+
     }
 
     private fun observeWeatherError() =
@@ -160,6 +162,7 @@ class MainFragment : Fragment() {
                     dateText.text = response.dailyWeather.first().date.convertToReadableDate()
                     weatherConditionText.text = getString(response.dailyWeather.first().weatherCode)
                     weatherIcon.setAnimation(response.dailyWeather.first().weatherIcon)
+                    weatherIcon.playAnimation()
                     adapter.setData(response.dailyWeather)
                 }
             }
@@ -176,7 +179,7 @@ class MainFragment : Fragment() {
         val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest.build())
         LocationServices.getSettingsClient(requireContext()).checkLocationSettings(builder.build())
             .addOnSuccessListener {
-                requestLocation()
+                getLocation()
             }.addOnFailureListener { exception ->
                 if (exception is ResolvableApiException) {
                     try {
@@ -188,7 +191,13 @@ class MainFragment : Fragment() {
                     }
                 }
             }
+    }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        locationPermissionRequest.unregister()
+        resolutionForResult.unregister()
     }
 
 }

@@ -6,23 +6,23 @@ ext {
     VERSION_BUILD = 0 //max three digits
 
     //----- Android config
-    androidBuildToolsVersion = '33.0.2'
+    androidBuildToolsVersion = '34.0.0'
     androidMinSdkVersion = 24
-    androidTargetSdkVersion = 33
-    androidCompileSdkVersion = 33
+    androidTargetSdkVersion = 34
+    androidCompileSdkVersion = 34
 
     //----- Android libraries
-    appCompatVersion = '1.5.1'
-    andoridXAnnotationVersion = '1.5.0'
+    appCompatVersion = '1.6.1'
+    andoridXAnnotationVersion = '1.7.0'
     annotationVersion = '1.3.2'
-    androidxCore = '1.9.0'
+    androidxCore = '1.10.1'
     fragmentVersion = '1.5.5'
     activityVersion = '1.6.1'
-    kotlinCoroutinesVersion = '1.6.4'
+    kotlinCoroutinesVersion = '1.7.3'
     coroutinePermissionVersion = '2.0.3'
     androidxConstraintlayoutVersion = '2.1.4'
     androidxLifecycleExtensionsVersion = '2.2.0'
-    androidxLifecycleVersion = '2.5.1'
+    androidxLifecycleVersion = '2.6.2'
     materialVersion = '1.9.0'
     locationServiceVersion = '21.0.1'
     googleGsonVersion = '2.10.1'
@@ -35,15 +35,16 @@ ext {
     lottieVersion = '6.1.0'
 
     //----- Test Libraries
-    testCoreVersion = '1.4.0'
-    testExtJUnitVersion = '1.1.3'
-    testKotlinxCoroutines = '1.6.4'
-    testRunnerVersion = '1.5.0'
+    testCoreVersion = '1.5.0'
+    testExtJUnitVersion = '1.1.5'
+    testKotlinxCoroutines = '1.7.3'
+    testRunnerVersion = '1.5.2'
     testJunitVersion = '4.13.2'
-    testArchCoreVersion = '2.1.0'
+    testArchCoreVersion = '2.2.0'
     testMockitoVersion = '4.11.0'
-    testMockKVersion = '1.13.3'
+    testMockKVersion = '1.13.7'
     truthVersion = "1.1.3"
+    testRulesVersion = '1.5.0'
 
 
     kotlin = [
@@ -102,7 +103,7 @@ ext {
             coreKtx       : "androidx.test:core-ktx:$rootProject.testCoreVersion",
             junitKtx      : "androidx.test.ext:junit-ktx:$rootProject.testExtJUnitVersion",
             runner        : "androidx.test:runner:$rootProject.testRunnerVersion",
-            rule          : "androidx.test:rules:$rootProject.testRunnerVersion",
+            rule          : "androidx.test:rules:$rootProject.testRulesVersion",
             junit         : "androidx.test.ext:junit:$rootProject.testExtJUnitVersion",
             truth         : "com.google.truth:truth:$rootProject.truthVersion",
             koin          : "io.insert-koin:koin-test-junit4:$koinVersion"

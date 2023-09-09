@@ -33,7 +33,7 @@ inline fun <reified T> ResultEntity<T>.updateOnSuccess(callback: (T) -> Unit): R
 
 inline fun <reified T> ResultEntity<T>.doOnError(onError: (ErrorEntity) -> Unit): ResultEntity<T> {
     if (this is ResultEntity.Error) {
-        this.error?.let { onError.invoke(it) }
+        onError.invoke(this.error)
     }
     return this
 }
@@ -46,7 +46,7 @@ inline fun <reified T> ResultEntity<T>.updateOnComplete(callback: () -> Unit): R
 }
 
 fun String?.convertToReadableDate(): String {
-    val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this)
+    val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this.orEmpty())
     val outputFormatter = SimpleDateFormat("EEEE, MMM dd", Locale.getDefault())
     return date?.let { outputFormatter.format(it) } ?: ""
 }
@@ -55,7 +55,7 @@ fun String?.convertToDayDate(): String {
     return if (dateIsToday(this.orEmpty())) {
         "Today"
     } else {
-        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this)
+        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this.orEmpty())
         val outputFormatter = SimpleDateFormat("EEEE, MMM dd", Locale.getDefault())
         date?.let { outputFormatter.format(it) } ?: ""
     }
@@ -90,8 +90,6 @@ fun View.visibilityState(visible: Boolean) {
 }
 
 fun Double?.ifZero(value: Double) = if (this == null || this == 0.0) value else this
-
-fun isLocationEmpty(lat:Double,lon:Double)= lat!=0.0 && lon!=0.0
 
 fun <T> LiveData<T>.getOrAwaitValue(
     time: Long = 2,

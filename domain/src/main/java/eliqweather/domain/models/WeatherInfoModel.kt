@@ -13,7 +13,7 @@ sealed class WeatherInfoModel {
         val hourly: String = "",
         val daily: String = "",
         val timezone: String = "",
-        val forecastDays : Int =7
+        val forecastDays: Int = 10
     ) : WeatherInfoModel()
 
     data class Response(
