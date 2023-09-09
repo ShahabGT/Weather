@@ -1,18 +1,18 @@
 package ir.shahabazimi.eliqweather
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import eliqweather.data.utils.getOrAwaitValue
+import eliqweather.data.utils.getOrAwaitForResult
 import eliqweather.domain.models.ResultEntity
 import eliqweather.domain.models.WeatherInfoModel
 import eliqweather.domain.usecase.GetWeatherInfoUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
+import ir.shahabazimi.eliqweather.presentation.WeatherViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
@@ -73,10 +73,33 @@ class ViewModelTest {
         } returns ResultEntity.Success(expectedResponse)
 
 
-        val response = viewModel.response.getOrAwaitValue {
+        val response = viewModel.response.getOrAwaitForResult {
             viewModel.getWeatherInfo()
         }
-        advanceUntilIdle()
+        assert(response == expectedResponse)
+
+    }
+
+    @Test
+    fun `Check Online Weather Response`() = runTest(testDispatcher) {
+        val request = WeatherInfoModel.Request(
+            isOnline = true,
+            latitude = 53.22,
+            longitude = 12.44
+        )
+        val expectedResponse = WeatherInfoModel.Response(
+            latitude = 53.22,
+            longitude = 12.44
+        )
+
+        coEvery {
+            weatherInfoUseCase(request)
+        } returns ResultEntity.Success(expectedResponse)
+
+
+        val response = viewModel.response.getOrAwaitForResult {
+            viewModel.getWeatherInfo()
+        }
         assert(response == expectedResponse)
 
     }

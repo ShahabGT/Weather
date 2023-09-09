@@ -91,7 +91,7 @@ fun View.visibilityState(visible: Boolean) {
 
 fun Double?.ifZero(value: Double) = if (this == null || this == 0.0) value else this
 
-fun <T> LiveData<T>.getOrAwaitValue(
+fun <T> LiveData<T>.getOrAwaitForResult(
     time: Long = 2,
     timeUnit: TimeUnit = TimeUnit.SECONDS,
     afterObserve: () -> Unit = {}
@@ -99,10 +99,12 @@ fun <T> LiveData<T>.getOrAwaitValue(
     var data: T? = null
     val latch = CountDownLatch(1)
     val observer = object : Observer<T> {
-        override fun onChanged(o: T?) {
-            data = o
-            latch.countDown()
-            this@getOrAwaitValue.removeObserver(this)
+        override fun onChanged(o: T) {
+            if (o is ResultEntity<*>) {
+                data = o
+                latch.countDown()
+                this@getOrAwaitForResult.removeObserver(this)
+            }
         }
     }
     this.observeForever(observer)
