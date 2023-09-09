@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit
  * @Author: Shahab Azimi
  * @Date: 2023 - 09 - 02
  **/
+//apps retrofit helper for api calls
 class RetrofitHelper {
 
     private lateinit var httpClient: OkHttpClient
@@ -32,6 +33,7 @@ class RetrofitHelper {
 
     private fun initHttpClient(isFollowRedirect: Boolean = true) {
         val logging = HttpLoggingInterceptor()
+        // if the app is development flavor we want to see all the logs in log cat
         logging.level = if (BuildConfig.DEBUG)
             HttpLoggingInterceptor.Level.BODY
         else
@@ -40,7 +42,7 @@ class RetrofitHelper {
         httpClient = OkHttpClient.Builder().apply {
             addInterceptor(logging)
             followRedirects(isFollowRedirect)
-
+            //time-outs is based on app flavor and can be found in flavors.gradle
             readTimeout(BuildConfig.TIME_OUT.toLong(), TimeUnit.SECONDS)
             writeTimeout(BuildConfig.TIME_OUT.toLong(), TimeUnit.SECONDS)
             connectTimeout(BuildConfig.TIME_OUT.toLong(), TimeUnit.SECONDS)
@@ -55,6 +57,7 @@ class RetrofitHelper {
     }
 
     private fun initBankRemoteService() {
+        // we want to call ServerServices api calls with this retrofit client
         serverService = bankRetrofit.create(ServerService::class.java)
     }
 

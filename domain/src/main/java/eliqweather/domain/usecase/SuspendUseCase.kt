@@ -7,6 +7,7 @@ import kotlinx.coroutines.withContext
  * @Author: Shahab Azimi
  * @Date: 2023 - 09 - 02
  **/
+// an abstract class for implementing a coroutine suspend call
 abstract class SuspendUseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher) {
 
     suspend operator fun invoke(parameters: P): R =

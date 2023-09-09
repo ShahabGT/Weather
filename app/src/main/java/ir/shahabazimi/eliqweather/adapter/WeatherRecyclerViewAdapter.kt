@@ -13,6 +13,7 @@ import ir.shahabazimi.eliqweather.databinding.WeatherItemBinding
  * @Author: Shahab Azimi
  * @Date: 2023 - 09 - 05
  **/
+//main recycler adapter which implemented the WeatherDiffCallback
 class WeatherRecyclerViewAdapter :
     RecyclerView.Adapter<WeatherRecyclerViewAdapter.ViewHolder>() {
 
@@ -32,7 +33,7 @@ class WeatherRecyclerViewAdapter :
                 item.minTemperature.toString()
             )
             iconItemImageView.setAnimation(item.weatherIcon)
-            iconItemImageView.playAnimation()
+            iconItemImageView.playAnimation() // must call playAnimation after setAnimation
             conditionItemText.text = binding.root.context.getString(
                 item.weatherCode
             )
@@ -51,6 +52,7 @@ class WeatherRecyclerViewAdapter :
 
     override fun getItemCount() = items.size
 
+    //this function is used to load and reload data to the recyclerview
     fun setData(newItems: List<DailyWeatherModel>) {
         val diffResult = DiffUtil.calculateDiff(WeatherDiffCallback(items, newItems))
         items = newItems

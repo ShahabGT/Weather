@@ -18,7 +18,7 @@ import org.koin.dsl.module
  * @Author: Shahab Azimi
  * @Date: 2023 - 09 - 03
  **/
-
+//apps koin dependency injection
 val appModule = module {
 
     factory<eliqweather.data.utils.ErrorHandler> {

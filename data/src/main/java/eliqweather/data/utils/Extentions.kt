@@ -24,6 +24,7 @@ fun Double?.orZero() = this ?: 0.0
 fun String?.ifNullOrEmpty(value: String) = if (this.isNullOrBlank()) value else this
 
 
+//upon getting the result if is type of ResultEntity.Success the call back will be called
 inline fun <reified T> ResultEntity<T>.updateOnSuccess(callback: (T) -> Unit): ResultEntity<T> {
     if (this is ResultEntity.Success) {
         callback.invoke(data)
@@ -31,6 +32,7 @@ inline fun <reified T> ResultEntity<T>.updateOnSuccess(callback: (T) -> Unit): R
     return this
 }
 
+//upon getting the result if is type of ResultEntity.Error the call back will be called
 inline fun <reified T> ResultEntity<T>.doOnError(onError: (ErrorEntity) -> Unit): ResultEntity<T> {
     if (this is ResultEntity.Error) {
         onError.invoke(this.error)
@@ -38,6 +40,7 @@ inline fun <reified T> ResultEntity<T>.doOnError(onError: (ErrorEntity) -> Unit)
     return this
 }
 
+//after getting the result whatever its Success or Error this callback will be called
 inline fun <reified T> ResultEntity<T>.updateOnComplete(callback: () -> Unit): ResultEntity<T> {
     if (this is ResultEntity.Success || this is ResultEntity.Error) {
         callback()
@@ -45,25 +48,27 @@ inline fun <reified T> ResultEntity<T>.updateOnComplete(callback: () -> Unit): R
     return this
 }
 
+//converts the 2023-09-09 date to Sunday, Sep 09
 fun String?.convertToReadableDate(): String {
     val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this.orEmpty())
     val outputFormatter = SimpleDateFormat("EEEE, MMM dd", Locale.getDefault())
     return date?.let { outputFormatter.format(it) } ?: ""
 }
 
+//converts the 2023-09-09 date to Sunday, Sep 09 if the date is today the Today title wil be returned
 fun String?.convertToDayDate(): String {
     return if (dateIsToday(this.orEmpty())) {
         "Today"
     } else {
-        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this.orEmpty())
-        val outputFormatter = SimpleDateFormat("EEEE, MMM dd", Locale.getDefault())
-        date?.let { outputFormatter.format(it) } ?: ""
+        this.convertToReadableDate()
     }
 }
 
+//getting the current hour of day
 fun getHourOfDay() =
     Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
 
+//getting today's date
 private fun getTodayDate(): String {
     val calendar = Calendar.getInstance()
     val year = calendar.get(Calendar.YEAR)
@@ -73,6 +78,7 @@ private fun getTodayDate(): String {
     return "$year-$month-$dayOfMonth"
 }
 
+//compare current date and second date to check whether the second date is today
 fun dateIsToday(date: String): Boolean {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     val today = getTodayDate()
@@ -91,6 +97,8 @@ fun View.visibilityState(visible: Boolean) {
 
 fun Double?.ifZero(value: Double) = if (this == null || this == 0.0) value else this
 
+//an extension function for live data to wait for value of the live data
+//used for unit test only
 fun <T> LiveData<T>.getOrAwaitForResult(
     time: Long = 2,
     timeUnit: TimeUnit = TimeUnit.SECONDS,
