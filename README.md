@@ -16,6 +16,7 @@ Eliq Weather is a simple weather app<br>
 1. [Technologies](https://github.com/ShahabGT/EliqWeather#technologies)<br>
 2. [Overview](https://github.com/ShahabGT/EliqWeather#overview)<br>
 3. [Clean Architecture](https://github.com/ShahabGT/EliqWeather#clean-architecture)<br>
+4. [Download](https://github.com/ShahabGT/EliqWeather#download)<br>
 
 # Technologies Used
 this app is complied over SDK 34 (android 14). minimum supported android version is SDK 24 (android 7).
@@ -51,6 +52,9 @@ this module contains the Retrofit Configm Local and Remote data sources implemen
 ## Domain
 Server response data classes and local and remote data source interfaces and be found in this module.
 </br>this module does not have any drawable or layout designs.
+
+# Download
+[Downlaod](https://github.com/ShahabGT/EliqWeather/blob/master/eliq_weather_v.1.0.0.apk)
 
 
 # Developed By
