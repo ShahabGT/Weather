@@ -1,6 +1,6 @@
-# Eliq Weather
+# Simple Weather
 
-Eliq Weather is a simple weather app<br>
+Simple Weather is a weather app<br>
 </br>Used Kotlin, MVVM and Clean Architecture to develop application.
 </br>Used Koin for dependency injection.
 </br>Used Single Activity design pattern.
