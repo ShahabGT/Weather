@@ -6,11 +6,11 @@ plugins {
 apply from: "${rootProject.projectDir}/flavors.gradle"
 
 android {
-    namespace 'ir.shahabazimi.eliqweather'
+    namespace 'ir.shahabazimi.weather'
     compileSdk libs.versions.androidCompileSdkVersion.get().toInteger()
 
     defaultConfig {
-        applicationId "ir.shahabazimi.eliqweather"
+        applicationId "ir.shahabazimi.weather"
         minSdk libs.versions.androidMinSdkVersion.get().toInteger()
         targetSdk libs.versions.androidTargetSdkVersion.get().toInteger()
         versionCode libs.versions.version.major.get().toInteger() * 10000000 + libs.versions.version.minor.get().toInteger() * 100000 + libs.versions.version.patch.get().toInteger() * 1000 + libs.versions.version.build.get().toInteger()

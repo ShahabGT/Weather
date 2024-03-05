@@ -13,10 +13,10 @@ Simple Weather is a weather app<br>
 </p>
 
 # Table of Contents
-1. [Technologies](https://github.com/ShahabGT/EliqWeather#technologies)<br>
-2. [Overview](https://github.com/ShahabGT/EliqWeather#overview)<br>
-3. [Clean Architecture](https://github.com/ShahabGT/EliqWeather#clean-architecture)<br>
-4. [Download](https://github.com/ShahabGT/EliqWeather#download)<br>
+1. [Technologies](https://github.com/ShahabGT/Weather#technologies)<br>
+2. [Overview](https://github.com/ShahabGT/Weather#overview)<br>
+3. [Clean Architecture](https://github.com/ShahabGT/Weather#clean-architecture)<br>
+4. [Download](https://github.com/ShahabGT/Weather#download)<br>
 
 # Technologies Used
 this app is complied over SDK 34 (android 14). minimum supported android version is SDK 24 (android 7).
@@ -54,7 +54,7 @@ Server response data classes and local and remote data source interfaces and be 
 </br>this module does not have any drawable or layout designs.
 
 # Download
-[Downlaod](https://github.com/ShahabGT/EliqWeather/blob/master/eliq_weather_v.1.0.0.apk)
+[Downlaod](https://github.com/ShahabGT/Weather/blob/master/eliq_weather_v.1.0.0.apk)
 
 
 # Developed By
