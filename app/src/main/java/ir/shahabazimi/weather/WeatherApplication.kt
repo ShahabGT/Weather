@@ -9,13 +9,13 @@ import org.koin.core.context.startKoin
  * @Author: Shahab Azimi
  * @Date: 2023 - 09 - 02
  **/
-class Application : Application() {
+class WeatherApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
         //initializing koin for app
         startKoin {
-            androidContext(this@Application)
+            androidContext(this@WeatherApplication)
             modules(appModule)
         }
     }
