@@ -1,23 +1,20 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
-apply from: "${rootProject.projectDir}/dependencies.gradle"
 apply from: "${rootProject.projectDir}/flavors.gradle"
 
 android{
     namespace = 'eliqweather.data'
-    compileSdk rootProject.androidCompileSdkVersion
-
+    compileSdk libs.versions.androidCompileSdkVersion.get().toInteger()
+    defaultConfig {
+        minSdk libs.versions.androidMinSdkVersion.get().toInteger()
+        targetSdk libs.versions.androidTargetSdkVersion.get().toInteger()
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = '17'
     }
 
     buildTypes {
@@ -43,16 +40,16 @@ dependencies {
 
     implementation project(":domain")
 
-    implementation rootProject.androidx.annotation
-    implementation rootProject.androidx.livedataKtx
+    implementation libs.androidx.annotation
+    implementation libs.androidx.livedataKtx
 
-    implementation rootProject.retrofit.main
-    implementation rootProject.retrofit.converter
+    implementation libs.retrofit.main
+    implementation libs.retrofit.converter
 
-    implementation rootProject.okhttp.main
-    implementation rootProject.okhttp.logging
-    implementation rootProject.okhttp.cookie
+    implementation libs.okhttp.main
+    implementation libs.okhttp.logging
+    implementation libs.okhttp.cookie
 
-    implementation rootProject.kotlin.coroutineCore
+    implementation libs.kotlin.coroutineCore
 
 }

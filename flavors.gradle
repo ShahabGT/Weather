@@ -7,10 +7,10 @@ ext.flavorConfig = {
             ext.myApplicationIdSuffix = '.dev'
             dimension "default"
 
-            buildConfigField "int", "VERSION_MAJOR", "$rootProject.VERSION_MAJOR"
-            buildConfigField "int", "VERSION_MINOR", "$rootProject.VERSION_MINOR"
-            buildConfigField "int", "VERSION_PATCH", "$rootProject.VERSION_PATCH"
-            buildConfigField "int", "VERSION_BUILD", "$rootProject.VERSION_BUILD"
+            buildConfigField "int", "VERSION_MAJOR", libs.versions.version.major.get()
+            buildConfigField "int", "VERSION_MINOR", libs.versions.version.minor.get()
+            buildConfigField "int", "VERSION_PATCH", libs.versions.version.patch.get()
+            buildConfigField "int", "VERSION_BUILD", libs.versions.version.build.get()
             buildConfigField("int", "TIME_OUT", "90")
 
         }
@@ -18,10 +18,10 @@ ext.flavorConfig = {
         production {
             dimension "default"
 
-            buildConfigField "int", "VERSION_MAJOR", "$rootProject.VERSION_MAJOR"
-            buildConfigField "int", "VERSION_MINOR", "$rootProject.VERSION_MINOR"
-            buildConfigField "int", "VERSION_PATCH", "$rootProject.VERSION_PATCH"
-            buildConfigField "int", "VERSION_BUILD", "$rootProject.VERSION_BUILD"
+            buildConfigField "int", "VERSION_MAJOR", libs.versions.version.major.get()
+            buildConfigField "int", "VERSION_MINOR", libs.versions.version.minor.get()
+            buildConfigField "int", "VERSION_PATCH", libs.versions.version.patch.get()
+            buildConfigField "int", "VERSION_BUILD", libs.versions.version.build.get()
             buildConfigField("int", "TIME_OUT", "30")
         }
     }
