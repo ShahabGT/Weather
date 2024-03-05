@@ -10,7 +10,7 @@ sealed class ErrorEntity(var message: String, val code: Int) {
 
     data class Generic(var data: String) : ErrorEntity(data, -3)
 
-    data object Network : ErrorEntity("No Network Access", -1)
+    object Network : ErrorEntity("No Network Access", -1)
 
-    data object UnknownHost : ErrorEntity("Unknown host", -2)
+    object UnknownHost : ErrorEntity("Unknown host", -2)
 }
