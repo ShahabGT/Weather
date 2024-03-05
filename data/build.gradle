@@ -6,7 +6,7 @@ plugins {
 apply from: "${rootProject.projectDir}/flavors.gradle"
 
 android{
-    namespace = 'eliqweather.data'
+    namespace = 'weather.data'
     compileSdk libs.versions.androidCompileSdkVersion.get().toInteger()
     defaultConfig {
         minSdk libs.versions.androidMinSdkVersion.get().toInteger()
