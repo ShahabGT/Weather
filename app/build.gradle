@@ -1,22 +1,20 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
-apply from: "${rootProject.projectDir}/dependencies.gradle"
 apply from: "${rootProject.projectDir}/flavors.gradle"
 
 android {
     namespace 'ir.shahabazimi.eliqweather'
-    compileSdk rootProject.androidCompileSdkVersion
+    compileSdk libs.versions.androidCompileSdkVersion.get().toInteger()
 
     defaultConfig {
         applicationId "ir.shahabazimi.eliqweather"
-        minSdk rootProject.androidMinSdkVersion
-        targetSdk rootProject.androidTargetSdkVersion
-        versionCode rootProject.VERSION_MAJOR * 10000000 + rootProject.VERSION_MINOR * 100000 + rootProject.VERSION_PATCH * 1000 + rootProject.VERSION_BUILD
-        versionName "${rootProject.VERSION_MAJOR}.${rootProject.VERSION_MINOR}.${rootProject.VERSION_PATCH}.${rootProject.VERSION_BUILD}"
+        minSdk libs.versions.androidMinSdkVersion.get().toInteger()
+        targetSdk libs.versions.androidTargetSdkVersion.get().toInteger()
+        versionCode libs.versions.version.major.get().toInteger() * 10000000 + libs.versions.version.minor.get().toInteger() * 100000 + libs.versions.version.patch.get().toInteger() * 1000 + libs.versions.version.build.get().toInteger()
+        versionName "${libs.versions.version.major}.${libs.versions.version.minor}.${libs.versions.version.patch}.${libs.versions.version.build}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,9 +44,6 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = '17'
-    }
 }
 
 dependencies {
@@ -56,30 +51,30 @@ dependencies {
     implementation project(":data")
     implementation project(":domain")
 
-    implementation rootProject.androidx.core
-    implementation rootProject.androidx.appcompat
-    implementation rootProject.androidx.viewmodelKtx
-    implementation rootProject.androidx.constraintlayout
-    implementation rootProject.androidx.navFrag
-    implementation rootProject.androidx.navUi
-    implementation rootProject.androidx.swipeRefresh
+    implementation libs.androidx.core
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.viewmodelKtx
+    implementation libs.androidx.constraintlayout
+    implementation libs.androidx.navFrag
+    implementation libs.androidx.navUi
+    implementation libs.androidx.swipeRefresh
 
-    implementation rootProject.tool.lottie
+    implementation libs.tool.lottie
 
-    implementation rootProject.google.material
-    implementation rootProject.google.locationServices
+    implementation libs.google.material
+    implementation libs.google.locationServices
 
-    implementation rootProject.koin.main
+    implementation libs.koin.main
 
-    testImplementation rootProject.tests.unit
-    testImplementation rootProject.tests.arch
-    androidTestImplementation rootProject.tests.arch
-    testImplementation rootProject.tests.coroutines
-    testImplementation rootProject.tests.mockK
-    testImplementation rootProject.tests.koin
-    androidTestImplementation rootProject.tests.coreKtx
-    androidTestImplementation rootProject.tests.junitKtx
-    androidTestImplementation rootProject.tests.runner
-    androidTestImplementation rootProject.tests.rule
-    androidTestImplementation rootProject.tests.junit
+    testImplementation libs.tests.unit
+    testImplementation libs.tests.arch
+    androidTestImplementation libs.tests.arch
+    testImplementation libs.tests.coroutines
+    testImplementation libs.tests.mockK
+    testImplementation libs.tests.koin
+    androidTestImplementation libs.tests.coreKtx
+    androidTestImplementation libs.tests.junitKtx
+    androidTestImplementation libs.tests.runner
+    androidTestImplementation libs.tests.rule
+    androidTestImplementation libs.tests.junit
 }

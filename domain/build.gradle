@@ -1,34 +1,27 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
-
-apply from: "${rootProject.projectDir}/dependencies.gradle"
 
 android{
     namespace = 'eliqweather.domain'
-    compileSdk rootProject.androidCompileSdkVersion
+    compileSdk libs.versions.androidCompileSdkVersion.get().toInteger()
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = '17'
     }
 }
 
 
 dependencies {
 
-    implementation rootProject.kotlin.main
-    implementation rootProject.kotlin.coroutineCore
-    implementation rootProject.kotlin.coroutineAndroid
+    implementation libs.kotlin.main
+    implementation libs.kotlin.coroutineCore
+    implementation libs.kotlin.coroutineAndroid
 
-    implementation rootProject.google.gson
+    implementation libs.google.gson
 
-    implementation rootProject.androidx.annotation
+    implementation libs.androidx.annotation
 
 }
