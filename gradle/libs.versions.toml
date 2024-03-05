@@ -5,7 +5,6 @@ version_minor = '0'
 version_patch = '0'
 version_build = '0'
 
-androidBuildToolsVersion = '34.0.0'
 androidMinSdkVersion = '24'
 androidTargetSdkVersion = '34'
 androidCompileSdkVersion = '34'
@@ -13,17 +12,12 @@ androidCompileSdkVersion = '34'
 #----- Android libraries
 appCompatVersion = "1.6.1"
 andoridXAnnotationVersion = "1.7.1"
-annotationVersion = "1.3.2"
 androidxCore = "1.12.0"
-fragmentVersion = "1.6.2"
-activityVersion = "1.8.2"
 kotlin_version = "1.9.22"
 ksp_version = "1.8.10-1.0.9"
 nav_version = "2.7.7"
 kotlinCoroutinesVersion = "1.7.3"
-coroutinePermissionVersion = "2.0.3"
 androidxConstraintlayoutVersion = "2.1.4"
-androidxLifecycleExtensionsVersion = "2.2.0"
 androidxLifecycleVersion = "2.7.0"
 materialVersion = "1.11.0"
 locationServiceVersion = "21.1.0"
@@ -43,9 +37,7 @@ testKotlinxCoroutines = "1.7.3"
 testRunnerVersion = "1.5.2"
 testJunitVersion = "4.13.2"
 testArchCoreVersion = "2.2.0"
-testMockitoVersion = "4.11.0"
 testMockKVersion = "1.13.7"
-truthVersion = "1.1.3"
 testRulesVersion = "1.5.0"
 
 #----- Plugins
@@ -58,24 +50,16 @@ kotlin-main = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.
 kotlin-coroutineCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinCoroutinesVersion" }
 kotlin-coroutineAndroid = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinCoroutinesVersion" }
 
-androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activityVersion" }
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "andoridXAnnotationVersion" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appCompatVersion" }
 androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
-androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentVersion" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidxConstraintlayoutVersion" }
 androidx-livedataKtx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidxLifecycleVersion" }
-androidx-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "androidxLifecycleExtensionsVersion" }
 androidx-viewmodelKtx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidxLifecycleVersion" }
-androidx-lifecycleRuntime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycleVersion" }
-androidx-lifecycleCommon = { group = "androidx.lifecycle", name = "lifecycle-common-java8", version.ref = "androidxLifecycleVersion" }
 androidx-navFrag = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "nav_version" }
 androidx-navUi = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "nav_version" }
-androidx-navFeature = { group = "androidx.navigation", name = "navigation-dynamic-features-fragment", version.ref = "nav_version" }
 androidx-swipeRefresh = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swipeRefreshVersion" }
 
-tool-annotation = { group = "javax.annotation", name = "javax.annotation-api", version.ref = "annotationVersion" }
-tool-coroutinePermission = { group = "com.sagar", name = "coroutinespermission", version.ref = "coroutinePermissionVersion" }
 tool-lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottieVersion" }
 
 google-material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
@@ -92,21 +76,16 @@ okhttp-cookie = { group = "com.squareup.okhttp3", name = "okhttp-urlconnection",
 tests-unit = { group = "junit", name = "junit", version.ref = "testJunitVersion" }
 tests-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "testKotlinxCoroutines" }
 tests-arch = { group = "androidx.arch.core", name = "core-testing", version.ref = "testArchCoreVersion" }
-tests-mockitoAndroid = { group = "org.mockito", name = "mockito-android", version.ref = "testMockitoVersion" }
 tests-mockK = { group = "io.mockk", name = "mockk", version.ref = "testMockKVersion" }
 tests-coreKtx = { group = "androidx.test", name = "core-ktx", version.ref = "testCoreVersion" }
 tests-junitKtx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "testExtJUnitVersion" }
 tests-runner = { group = "androidx.test", name = "runner", version.ref = "testRunnerVersion" }
 tests-rule = { group = "androidx.test", name = "rules", version.ref = "testRulesVersion" }
 tests-junit = { group = "androidx.test.ext", name = "junit", version.ref = "testExtJUnitVersion" }
-tests-truth = { group = "com.google.truth", name = "truth", version.ref = "truthVersion" }
 tests-koin = { group = "io.insert-koin", name = "koin-test-junit4", version.ref = "koinVersion" }
 
 koin-main = { group = "io.insert-koin", name = "koin-android", version.ref = "koinVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
-android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 android-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp_version" }
-
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin_version" }
