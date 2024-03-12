@@ -18,7 +18,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.Priority
@@ -66,6 +68,22 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     }
 
+    // priority balances is used because accurate location is not used
+    // interval is can be omitted because it is a one time location call
+    private val locationRequest =
+        LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 10000)
+    private val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest.build())
+
+    private val mLocationCallback: LocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            for (location in locationResult.locations) {
+                if (location != null) {
+                   handleLocation(location)
+                }
+            }
+        }
+    }
+
     override fun bindView(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentMainBinding.inflate(inflater, container, false)
 
@@ -76,6 +94,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         observeWeatherLoading()
         observeWeatherResponse()
         viewModel.getWeatherInfo()
+
     }
 
     override fun setupViews(savedInstanceState: Bundle?) = with(binding) {
@@ -112,8 +131,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             .addOnSuccessListener { location: Location? ->
                 location?.let {
                     handleLocation(location)
-                } ?: viewModel.getWeatherInfo()
+                } ?: startLocationRequest()
             }
+    
+    @SuppressLint("MissingPermission")
+    private fun startLocationRequest(){
+        LocationServices.getFusedLocationProviderClient(requireContext()).requestLocationUpdates(locationRequest.build(), mLocationCallback, null)
+    }
 
     //handles the location address provided by fusedLocationClient
     @Suppress("DEPRECATION")
@@ -193,11 +217,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     //this function is used to ask the user to enabled the device gps
     private fun requestLocationServices() {
-        // priority balances is used because accurate location is not used
-        // interval is can be omitted because it is a one time location call
-        val locationRequest =
-            LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 100000)
-        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest.build())
+
         LocationServices.getSettingsClient(requireContext()).checkLocationSettings(builder.build())
             .addOnSuccessListener {
                 //this will be called when used enables the gps

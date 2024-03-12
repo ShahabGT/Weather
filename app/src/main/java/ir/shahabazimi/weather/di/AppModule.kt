@@ -1,19 +1,20 @@
 package ir.shahabazimi.weather.di
 
+import ir.shahabazimi.weather.presentation.WeatherViewModel
+import kotlinx.coroutines.Dispatchers
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 import weather.data.config.RetrofitHelper
 import weather.data.datasource.LocalWeatherInfoDataSource
 import weather.data.datasource.RemoteWeatherInfoDataSource
+import weather.data.utils.ErrorHandler
 import weather.data.utils.GeneralErrorHandlerImpl
+import weather.domain.repository.DataStoreProvider
 import weather.domain.repository.LocalWeatherDataSource
 import weather.domain.repository.WeatherDataSource
 import weather.domain.repository.WeatherRepository
 import weather.domain.usecase.GetWeatherInfoUseCase
-import ir.shahabazimi.weather.presentation.WeatherViewModel
-import kotlinx.coroutines.Dispatchers
-import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
-import weather.data.utils.ErrorHandler
+import weather.domain.usecase.SaveWeatherInfoUseCase
 
 /**
  * @Author: Shahab Azimi
@@ -30,8 +31,12 @@ val appModule = module {
         RetrofitHelper()
     }
 
+    single {
+        DataStoreProvider.getInstance(get())
+    }
+
     factory<LocalWeatherDataSource> {
-        LocalWeatherInfoDataSource(androidContext())
+        LocalWeatherInfoDataSource(get())
     }
 
     factory<WeatherDataSource> {
@@ -46,8 +51,12 @@ val appModule = module {
         GetWeatherInfoUseCase(get(), Dispatchers.IO)
     }
 
+    factory {
+        SaveWeatherInfoUseCase(get(), Dispatchers.IO)
+    }
+
     viewModel {
-        WeatherViewModel(get())
+        WeatherViewModel(get(), get())
     }
 
 }

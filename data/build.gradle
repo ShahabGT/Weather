@@ -43,6 +43,7 @@ dependencies {
 
     implementation libs.androidx.annotation
     implementation libs.androidx.livedataKtx
+    implementation libs.androidx.dataStore
 
     implementation libs.retrofit.main
     implementation libs.retrofit.converter

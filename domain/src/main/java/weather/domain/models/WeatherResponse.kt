@@ -1,8 +1,7 @@
 package weather.domain.models
 
+import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.gson.annotations.SerializedName
-import weather.domain.models.Daily
-import weather.domain.models.Hourly
 
 /**
  * @Author: Shahab Azimi
@@ -17,8 +16,12 @@ data class WeatherResponse(
     val latitude: Double,
     val longitude: Double,
     val timezone: String,
-    @SerializedName("timezoneAbbreviation")
-    val timezone_abbreviation: String,
+    @SerializedName("timezone_abbreviation")
+    val timezoneAbbreviation: String,
     @SerializedName("utc_offset_seconds")
     val utcOffsetInSeconds: Int
 )
+
+object WeatherResponseKey {
+    val DATA = stringPreferencesKey("weather_data")
+}

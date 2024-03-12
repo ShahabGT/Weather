@@ -9,5 +9,6 @@ import weather.domain.models.ResultEntity
  **/
 interface LocalWeatherDataSource {
     suspend fun getWeatherLocation(): ResultEntity<WeatherInfoModel.Response>
+    suspend fun saveWeatherLocation(data :WeatherInfoModel.Response)
 
 }
