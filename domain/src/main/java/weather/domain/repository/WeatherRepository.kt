@@ -20,4 +20,8 @@ class WeatherRepository(
             localDataSource.getWeatherLocation()
 
 
+    suspend fun saveWeatherInfo(data: WeatherInfoModel.Response) =
+        localDataSource.saveWeatherLocation(data)
+
+
 }

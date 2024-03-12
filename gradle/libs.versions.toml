@@ -23,6 +23,7 @@ materialVersion = "1.11.0"
 locationServiceVersion = "21.1.0"
 googleGsonVersion = "2.10.1"
 swipeRefreshVersion = "1.2.0-alpha01"
+dataStoreVersion = "1.0.0"
 
 #----- Third party Libraries
 retrofitVersion = "2.9.0"
@@ -59,6 +60,7 @@ androidx-viewmodelKtx = { group = "androidx.lifecycle", name = "lifecycle-viewmo
 androidx-navFrag = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "nav_version" }
 androidx-navUi = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "nav_version" }
 androidx-swipeRefresh = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swipeRefreshVersion" }
+androidx-dataStore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStoreVersion" }
 
 tool-lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottieVersion" }
 
