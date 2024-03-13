@@ -11,6 +11,7 @@ import java.util.Locale
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
+import kotlin.math.ceil
 
 /**
  * @Author: Shahab Azimi
@@ -96,6 +97,15 @@ fun View.visibilityState(visible: Boolean) {
 }
 
 fun Double?.ifZero(value: Double) = if (this == null || this == 0.0) value else this
+
+fun Double?.roundToNearestInt(): String {
+    val roundedValue = if (this.orZero() % 1 >= 0.5) {
+        Math.round(this.orZero()).toInt()
+    } else {
+        ceil(this.orZero()).toInt()
+    }
+    return roundedValue.toString()
+}
 
 //an extension function for live data to wait for value of the live data
 //used for unit test only

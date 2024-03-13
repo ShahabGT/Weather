@@ -24,5 +24,5 @@ class WeatherDiffCallback(
         oldWeatherList[oldItemPosition].date == newWeatherList[newItemPosition].date
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-        oldWeatherList[oldItemPosition] == newWeatherList[newItemPosition]
+        oldWeatherList[oldItemPosition].hashCode() == newWeatherList[newItemPosition].hashCode()
 }

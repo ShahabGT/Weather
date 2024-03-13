@@ -4,13 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import weather.data.utils.doOnError
-import weather.data.utils.ifZero
-import weather.data.utils.updateOnComplete
 import weather.data.utils.updateOnSuccess
 import weather.domain.models.WeatherInfoModel
 import weather.domain.usecase.GetWeatherInfoUseCase
-import kotlinx.coroutines.launch
 import weather.domain.usecase.SaveWeatherInfoUseCase
 
 class WeatherViewModel(
@@ -55,17 +53,18 @@ class WeatherViewModel(
                     latitude = latitude, // if the lat is empty we use default latitude (if its on offline mode it has no use)
                     longitude = longitude,
 
-                )
+                    )
             ).updateOnSuccess {
+                if (online)
+                    saveWeatherInfoUseCase.invoke(it)
+                _responseLoading.value = false
                 _response.value = it.apply {
                     if (!address.isNullOrBlank()) // on api response if the address provided by geo locator is not empty this will override the server value
                         it.timezone = address
                 }
-                if (online)
-                    saveWeatherInfoUseCase.invoke(it)
+
             }.doOnError {
                 _responseError.value = it.message
-            }.updateOnComplete {
                 _responseLoading.value = false
             }
         }
