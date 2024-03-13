@@ -24,13 +24,16 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.Priority
-import weather.data.utils.convertToReadableDate
-import weather.data.utils.getHourOfDay
-import weather.data.utils.visibilityState
 import ir.shahabazimi.weather.R
 import ir.shahabazimi.weather.adapter.WeatherRecyclerViewAdapter
 import ir.shahabazimi.weather.databinding.FragmentMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import weather.data.utils.convertToReadableDate
+import weather.data.utils.getHourOfDay
+import weather.data.utils.ifNullOrEmpty
+import weather.data.utils.orZero
+import weather.data.utils.roundToNearestInt
+import weather.data.utils.visibilityState
 import java.util.Locale
 
 
@@ -71,14 +74,15 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     // priority balances is used because accurate location is not used
     // interval is can be omitted because it is a one time location call
     private val locationRequest =
-        LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 10000)
-    private val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest.build())
+        LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 100000)
+    private val builder =
+        LocationSettingsRequest.Builder().addLocationRequest(locationRequest.build())
 
     private val mLocationCallback: LocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             for (location in locationResult.locations) {
                 if (location != null) {
-                   handleLocation(location)
+                    handleLocation(location)
                 }
             }
         }
@@ -114,12 +118,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             else
                 requestLocationServices()
         else
-            locationPermissionRequest.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+            locationPermissionRequest.launch(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 
     //checks whether location access is granted or not
     private fun locationPermissionGranted() = ContextCompat.checkSelfPermission(
-        requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
+        requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED
 
 
@@ -133,10 +137,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                     handleLocation(location)
                 } ?: startLocationRequest()
             }
-    
+
     @SuppressLint("MissingPermission")
-    private fun startLocationRequest(){
-        LocationServices.getFusedLocationProviderClient(requireContext()).requestLocationUpdates(locationRequest.build(), mLocationCallback, null)
+    private fun startLocationRequest() {
+        LocationServices.getFusedLocationProviderClient(requireContext())
+            .requestLocationUpdates(locationRequest.build(), mLocationCallback, null)
     }
 
     //handles the location address provided by fusedLocationClient
@@ -151,7 +156,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 geocoder.getFromLocation(latitude, longitude, 1) { addresses ->
                     addresses.first()?.let {
-                        viewModel.address = it.locality
+                        viewModel.address = it.thoroughfare.ifNullOrEmpty(it.locality)
                     }
                     viewModel.setLocation(latitude, longitude)
                 }
@@ -191,23 +196,28 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         }
 
     // created the layout based on the response from api (both online and offline) calls
-    private fun observeWeatherResponse() =
+    private fun observeWeatherResponse() = with(binding) {
         viewModel.response.observe(viewLifecycleOwner) { response ->
-            if (response != null) {
-                with(binding) {
-                    locationText.text = response.timezone
-                    temperatureText.text = getString(
-                        R.string.temperature_format,
-                        response.hourlyWeather[getHourOfDay()].temperature.toString()
-                    )
-                    dateText.text = response.dailyWeather.first().date.convertToReadableDate()
-                    weatherConditionText.text = getString(response.dailyWeather.first().weatherCode)
-                    weatherIcon.setAnimation(response.dailyWeather.first().weatherIcon)
-                    weatherIcon.playAnimation()
-                    adapter.setData(response.dailyWeather)
-                }
+            if (response != null && response.latitude.orZero().toInt() != 0) {
+                locationText.text = response.timezone
+                temperatureText.text = getString(
+                    R.string.temperature_format,
+                    response.hourlyWeather[getHourOfDay()].temperature.roundToNearestInt()
+                )
+                dateText.text = response.dailyWeather.first().date.convertToReadableDate()
+                weatherConditionText.text = getString(response.dailyWeather.first().weatherCode)
+                weatherIcon.setAnimation(response.dailyWeather.first().weatherIcon)
+                weatherIcon.playAnimation()
+                adapter.setData(response.dailyWeather)
+
+            } else {
+                errorView.visibilityState(true)
+                retryButton.visibilityState(false)
+                loadingView.visibilityState(false)
+                refreshLayout.isRefreshing = false
             }
         }
+    }
 
     //checks whether the device gps is enabled or not
     private fun isLocationServiceEnabled(): Boolean {
@@ -217,7 +227,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     //this function is used to ask the user to enabled the device gps
     private fun requestLocationServices() {
-
         LocationServices.getSettingsClient(requireContext()).checkLocationSettings(builder.build())
             .addOnSuccessListener {
                 //this will be called when used enables the gps

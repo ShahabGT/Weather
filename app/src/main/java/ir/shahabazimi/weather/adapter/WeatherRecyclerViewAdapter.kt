@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import weather.data.utils.convertToDayDate
-import weather.domain.models.DailyWeatherModel
 import ir.shahabazimi.weather.R
 import ir.shahabazimi.weather.databinding.WeatherItemBinding
+import weather.data.utils.convertToDayDate
+import weather.data.utils.roundToNearestInt
+import weather.domain.models.DailyWeatherModel
 
 /**
  * @Author: Shahab Azimi
@@ -26,11 +27,11 @@ class WeatherRecyclerViewAdapter :
             dayItemText.text = item.date.convertToDayDate()
             highTemperatureItemText.text = binding.root.context.getString(
                 R.string.temperature_format,
-                item.maxTemperature.toString()
+                item.maxTemperature.roundToNearestInt()
             )
             lowTemperatureItemText.text = binding.root.context.getString(
                 R.string.temperature_format,
-                item.minTemperature.toString()
+                item.minTemperature.roundToNearestInt()
             )
             iconItemImageView.setAnimation(item.weatherIcon)
             iconItemImageView.playAnimation() // must call playAnimation after setAnimation

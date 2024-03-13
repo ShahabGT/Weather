@@ -10,12 +10,13 @@ data class DailyWeatherModel(
     val minTemperature: Double = 0.0,
     val weatherCode: Int,
     val weatherIcon: Int,
-){
+) {
     override fun equals(other: Any?): Boolean {
         val data = other as DailyWeatherModel
         return date == data.date &&
                 maxTemperature == data.maxTemperature &&
-                minTemperature == data.minTemperature
+                minTemperature == data.minTemperature &&
+                weatherCode == data.weatherIcon
     }
 
     override fun hashCode(): Int {
