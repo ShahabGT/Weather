@@ -6,6 +6,8 @@ package weather.domain.models
  **/
 data class HourlyWeatherModel(
     val time: String? = null,
-    val temperature: Double = 0.0,
+    val temperature: String? = null,
     val precipitation: Int = 0,
+    val weatherCode: Int,
+    val weatherIcon: Int,
 )

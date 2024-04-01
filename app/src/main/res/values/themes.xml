@@ -4,7 +4,7 @@
     <style name="Theme.Weather" parent="Theme.Material3.DayNight.NoActionBar">
 
         <item name="android:statusBarColor">?attr/Primary_Light</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
 
         <!--Primary-->
         <item name="Primary_Main">@color/primary_main</item>

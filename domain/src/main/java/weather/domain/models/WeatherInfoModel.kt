@@ -28,7 +28,7 @@ sealed class WeatherInfoModel {
 
     companion object {
         private const val DEFAULT_HOURLY =
-            "temperature_2m,precipitation_probability" // gets the weather info and precipitation probability hourly
+            "temperature_2m,precipitation_probability,weathercode" // gets the weather info and precipitation probability hourly
         private const val DEFAULT_DAILY =
             "temperature_2m_max,temperature_2m_min,weathercode" // gets the weather max and min temperature and weather code(like sunny...)
         private const val DEFAULT_TIMEZONE =

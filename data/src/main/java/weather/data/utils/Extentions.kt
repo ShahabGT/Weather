@@ -41,19 +41,18 @@ inline fun <reified T> ResultEntity<T>.doOnError(onError: (ErrorEntity) -> Unit)
     return this
 }
 
-//after getting the result whatever its Success or Error this callback will be called
-inline fun <reified T> ResultEntity<T>.updateOnComplete(callback: () -> Unit): ResultEntity<T> {
-    if (this is ResultEntity.Success || this is ResultEntity.Error) {
-        callback()
-    }
-    return this
-}
-
 //converts the 2023-09-09 date to Sunday, Sep 09
 fun String?.convertToReadableDate(): String {
     val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this.orEmpty())
     val outputFormatter = SimpleDateFormat("EEEE, MMM dd", Locale.getDefault())
     return date?.let { outputFormatter.format(it) } ?: ""
+}
+
+fun String?.convertToReadableTime(): String {
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault())
+    val outputFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
+
+    return inputFormat.parse(this.orEmpty())?.let { outputFormat.format(it) } ?: ""
 }
 
 //converts the 2023-09-09 date to Sunday, Sep 09 if the date is today the Today title wil be returned
@@ -95,8 +94,6 @@ fun dateIsToday(date: String): Boolean {
 fun View.visibilityState(visible: Boolean) {
     this.visibility = if (visible) View.VISIBLE else View.GONE
 }
-
-fun Double?.ifZero(value: Double) = if (this == null || this == 0.0) value else this
 
 fun Double?.roundToNearestInt(): String {
     val roundedValue = if (this.orZero() % 1 >= 0.5) {

@@ -11,7 +11,7 @@ ext.flavorConfig = {
             buildConfigField "int", "VERSION_MINOR", libs.versions.version.minor.get()
             buildConfigField "int", "VERSION_PATCH", libs.versions.version.patch.get()
             buildConfigField "int", "VERSION_BUILD", libs.versions.version.build.get()
-            buildConfigField("int", "TIME_OUT", "90")
+            buildConfigField("int", "TIME_OUT", "10")
 
         }
 
@@ -22,7 +22,7 @@ ext.flavorConfig = {
             buildConfigField "int", "VERSION_MINOR", libs.versions.version.minor.get()
             buildConfigField "int", "VERSION_PATCH", libs.versions.version.patch.get()
             buildConfigField "int", "VERSION_BUILD", libs.versions.version.build.get()
-            buildConfigField("int", "TIME_OUT", "30")
+            buildConfigField("int", "TIME_OUT", "10")
         }
     }
 

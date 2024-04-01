@@ -66,13 +66,24 @@
                     android:id="@+id/weatherIcon"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/dateText"
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true"
                     app:lottie_renderMode="hardware" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/hourlyRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weatherIcon" />
 
                 <View
                     android:layout_width="0dp"
@@ -88,7 +99,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/weatherConditionText"
-                    style="@style/TextAppearance.AppCompat.Display1"
+                    style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
@@ -96,7 +107,7 @@
                     android:textColor="?attr/Primary_Main"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/weatherIcon"
+                    app:layout_constraintTop_toBottomOf="@id/hourlyRecycler"
                     tools:text="Sunny" />
 
                 <View
@@ -170,18 +181,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:gravity="center"
+            android:text="@string/swipe_reload"
             android:textColor="?attr/High_Emphasis"
-            android:textSize="20sp"
-            tools:text="Something happend..." />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/retryButton"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/retry_button"
-            android:textColor="?attr/Primary_Main" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 </FrameLayout>
