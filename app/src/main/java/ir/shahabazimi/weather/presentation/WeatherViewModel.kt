@@ -33,7 +33,7 @@ class WeatherViewModel(
     val response: LiveData<WeatherInfoModel.Response?>
         get() = _response
 
-    private val _responseLoading = MutableLiveData<Boolean>()
+    val _responseLoading = MutableLiveData<Boolean>()
     val responseLoading: LiveData<Boolean>
         get() = _responseLoading
 
@@ -42,26 +42,23 @@ class WeatherViewModel(
         get() = _responseError
 
     //gets the weather from getWeatherInfoUseCase
-    fun getWeatherInfo() =
+    fun getWeatherInfo(isOnline:Boolean=true) =
         viewModelScope.launch {
-            val online =
-                latitude != 0.0 && longitude != 0.0 // if the location is empty we can assume it is in offline mode
             _responseLoading.value = true
             getWeatherInfoUseCase.invoke(
                 WeatherInfoModel.Request(
-                    isOnline = online,
-                    latitude = latitude, // if the lat is empty we use default latitude (if its on offline mode it has no use)
-                    longitude = longitude,
-
+                    isOnline = isOnline,
+                    latitude = latitude,
+                    longitude = longitude
                     )
             ).updateOnSuccess {
-                if (online)
-                    saveWeatherInfoUseCase.invoke(it)
                 _responseLoading.value = false
                 _response.value = it.apply {
                     if (!address.isNullOrBlank()) // on api response if the address provided by geo locator is not empty this will override the server value
                         it.timezone = address
                 }
+                if (isOnline && _response.value != null)
+                    saveWeatherInfoUseCase.invoke(_response.value!!)
 
             }.doOnError {
                 _responseError.value = it.message

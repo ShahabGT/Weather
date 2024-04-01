@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
@@ -25,6 +26,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.Priority
 import ir.shahabazimi.weather.R
+import ir.shahabazimi.weather.adapter.HourlyRecyclerViewAdapter
 import ir.shahabazimi.weather.adapter.WeatherRecyclerViewAdapter
 import ir.shahabazimi.weather.databinding.FragmentMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,8 +34,8 @@ import weather.data.utils.convertToReadableDate
 import weather.data.utils.getHourOfDay
 import weather.data.utils.ifNullOrEmpty
 import weather.data.utils.orZero
-import weather.data.utils.roundToNearestInt
 import weather.data.utils.visibilityState
+import weather.domain.models.DailyWeatherModel
 import java.util.Locale
 
 
@@ -45,7 +47,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     //initializing view model with koin
     private val viewModel: WeatherViewModel by viewModel()
-    private lateinit var adapter: WeatherRecyclerViewAdapter
+    private lateinit var weatherAdapter: WeatherRecyclerViewAdapter
+    private lateinit var hourlyAdapter: HourlyRecyclerViewAdapter
 
     //location client for getting users location (lat,lon)
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -97,13 +100,15 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         observeWeatherError()
         observeWeatherLoading()
         observeWeatherResponse()
-        viewModel.getWeatherInfo()
+        viewModel.getWeatherInfo(isOnline = false)
 
     }
 
     override fun setupViews(savedInstanceState: Bundle?) = with(binding) {
-        adapter = WeatherRecyclerViewAdapter()
-        dailyWeatherRecycler.adapter = adapter
+        weatherAdapter = WeatherRecyclerViewAdapter()
+        hourlyAdapter = HourlyRecyclerViewAdapter()
+        dailyWeatherRecycler.adapter = weatherAdapter
+        hourlyRecycler.adapter = hourlyAdapter
         refreshLayout.setOnRefreshListener {
             handleLocationPermission()
         }
@@ -129,7 +134,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     //gets users location
     @SuppressLint("MissingPermission")
-    private fun getLocation() =
+    private fun getLocation() {
+        viewModel._responseLoading.value = true
         fusedLocationClient.lastLocation
             // used elvis operator when the location is null gets the default weather data
             .addOnSuccessListener { location: Location? ->
@@ -137,6 +143,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                     handleLocation(location)
                 } ?: startLocationRequest()
             }
+    }
 
     @SuppressLint("MissingPermission")
     private fun startLocationRequest() {
@@ -174,14 +181,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     //function for observing api call errors, simply shows an error layout
     private fun observeWeatherError() =
-        viewModel.responseError.observe(viewLifecycleOwner) { error ->
-            with(binding) {
-                errorView.visibilityState(true)
-                errorText.text = error
-                retryButton.setOnClickListener {
-                    viewModel.getWeatherInfo()
-                }
-            }
+        viewModel.responseError.observe(viewLifecycleOwner) {
+                binding.errorView.visibilityState(true)
 
         }
 
@@ -202,17 +203,17 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                 locationText.text = response.timezone
                 temperatureText.text = getString(
                     R.string.temperature_format,
-                    response.hourlyWeather[getHourOfDay()].temperature.roundToNearestInt()
+                    response.hourlyWeather.first().temperature
                 )
                 dateText.text = response.dailyWeather.first().date.convertToReadableDate()
                 weatherConditionText.text = getString(response.dailyWeather.first().weatherCode)
                 weatherIcon.setAnimation(response.dailyWeather.first().weatherIcon)
                 weatherIcon.playAnimation()
-                adapter.setData(response.dailyWeather)
+                weatherAdapter.setData(response.dailyWeather)
+                hourlyAdapter.setData(response.hourlyWeather)
 
             } else {
                 errorView.visibilityState(true)
-                retryButton.visibilityState(false)
                 loadingView.visibilityState(false)
                 refreshLayout.isRefreshing = false
             }

@@ -2,12 +2,10 @@ package ir.shahabazimi.weather.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ir.shahabazimi.weather.R
 import ir.shahabazimi.weather.databinding.WeatherItemBinding
 import weather.data.utils.convertToDayDate
-import weather.data.utils.roundToNearestInt
 import weather.domain.models.DailyWeatherModel
 
 /**
@@ -18,7 +16,7 @@ import weather.domain.models.DailyWeatherModel
 class WeatherRecyclerViewAdapter :
     RecyclerView.Adapter<WeatherRecyclerViewAdapter.ViewHolder>() {
 
-    private var items: List<DailyWeatherModel> = listOf()
+    private var items: MutableList<DailyWeatherModel> = mutableListOf()
 
     private lateinit var binding: WeatherItemBinding
 
@@ -27,11 +25,11 @@ class WeatherRecyclerViewAdapter :
             dayItemText.text = item.date.convertToDayDate()
             highTemperatureItemText.text = binding.root.context.getString(
                 R.string.temperature_format,
-                item.maxTemperature.roundToNearestInt()
+                item.maxTemperature
             )
             lowTemperatureItemText.text = binding.root.context.getString(
                 R.string.temperature_format,
-                item.minTemperature.roundToNearestInt()
+                item.minTemperature
             )
             iconItemImageView.setAnimation(item.weatherIcon)
             iconItemImageView.playAnimation() // must call playAnimation after setAnimation
@@ -55,8 +53,8 @@ class WeatherRecyclerViewAdapter :
 
     //this function is used to load and reload data to the recyclerview
     fun setData(newItems: List<DailyWeatherModel>) {
-        val diffResult = DiffUtil.calculateDiff(WeatherDiffCallback(items, newItems))
-        items = newItems
-        diffResult.dispatchUpdatesTo(this)
+        items.clear()
+        items.addAll(newItems)
+        notifyDataSetChanged()
     }
 }

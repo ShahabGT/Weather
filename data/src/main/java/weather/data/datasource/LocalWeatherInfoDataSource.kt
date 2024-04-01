@@ -34,6 +34,7 @@ class LocalWeatherInfoDataSource(private val dataStoreProvider: DataStoreProvide
 
     override suspend fun saveWeatherLocation(data: WeatherInfoModel.Response) {
         dataStoreProvider.weatherDataStore.edit {
+            it.clear()
             it[WeatherResponseKey.DATA] = Gson().toJson(data)
         }
     }
