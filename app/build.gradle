@@ -18,6 +18,9 @@ android {
         versionName "${libs.versions.version.major}.${libs.versions.version.minor}.${libs.versions.version.patch}.${libs.versions.version.build}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        defaultConfig {
+            multiDexEnabled true
+        }
     }
 
     buildTypes {
@@ -41,8 +44,8 @@ android {
     with flavorConfig
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
 
 }
